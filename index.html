@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyT Huaylas - Portal Pedagógico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
     <style>
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
             --secondary: #059669;
             --accent: #f59e0b;
-            --danger: #dc2626;
             --bg: #f8fafc;
             --card: #ffffff;
             --text: #1e293b;
@@ -22,691 +26,207 @@
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* Header */
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100;
             box-shadow: var(--shadow-lg);
         }
-
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .logo i {
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .nav-desktop {
-            display: flex;
-            gap: 2rem;
-        }
-
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.25rem; }
+        .logo i { font-size: 1.5rem; color: var(--accent); }
+        .nav-desktop { display: flex; gap: 2rem; }
         .nav-desktop a {
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 500;
+            font-size: 0.9rem; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem;
         }
+        .nav-desktop a:hover, .nav-desktop a.active { color: white; }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
-        .nav-desktop a:hover, .nav-desktop a.active {
-            color: white;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero */
         .hero {
             background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-            color: white;
-            padding: 3rem 1.5rem;
-            text-align: center;
+            color: white; padding: 3rem 1.5rem; text-align: center;
         }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
+        .hero-content { max-width: 800px; margin: 0 auto; }
         .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255,255,255,0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.15); padding: 0.5rem 1rem;
+            border-radius: 9999px; font-size: 0.875rem; margin-bottom: 1.5rem; backdrop-filter: blur(10px);
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { font-size: 1.125rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-size: 0.95rem;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 600;
+            text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-size: 0.95rem;
         }
+        .btn-primary { background: white; color: var(--primary); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+        .btn-small { padding: 0.5rem 1rem; font-size: 0.875rem; }
 
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        /* Main Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        /* Quick Access */
         .quick-access {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: -2rem auto 3rem;
-            max-width: 1000px;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 10;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+            margin: -2rem auto 3rem; max-width: 1000px; padding: 0 1.5rem;
+            position: relative; z-index: 10;
         }
-
         .quick-card {
-            background: var(--card);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            background: var(--card); padding: 1.5rem; border-radius: 0.75rem;
+            box-shadow: var(--shadow-lg); text-align: center; cursor: pointer;
+            transition: all 0.3s; border: 2px solid transparent;
         }
+        .quick-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .quick-card i { font-size: 2rem; color: var(--primary); margin-bottom: 0.75rem; }
+        .quick-card h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .quick-card p { font-size: 0.875rem; color: var(--text-light); }
 
-        .quick-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
+        .section { margin-bottom: 4rem; }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 { font-size: 2rem; color: var(--text); margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
-        .quick-card i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .quick-card h3 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .quick-card p {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        /* Sections */
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-header p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
         .card {
-            background: var(--card);
-            border-radius: 0.75rem;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            cursor: pointer;
+            background: var(--card); border-radius: 0.75rem; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+            transition: all 0.3s; cursor: pointer;
         }
-
-        .card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
+        .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
         .card-header {
-            padding: 1.25rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
+            padding: 1.25rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: start;
         }
-
         .card-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 0.25rem;
+            padding: 0.25rem 0.75rem; border-radius: 9999px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
         }
-
         .tag-indagacion { background: #dbeafe; color: #1e40af; }
         .tag-evaluacion { background: #dcfce7; color: #166534; }
         .tag-tecnologia { background: #fef3c7; color: #92400e; }
         .tag-comunidad { background: #f3e8ff; color: #7c3aed; }
+        .card-body { padding: 1.25rem; }
+        .card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); }
+        .card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+        .card-meta { display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-light); }
+        .card-meta span { display: flex; align-items: center; gap: 0.25rem; }
 
-        .card-body {
-            padding: 1.25rem;
-        }
-
-        .card h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .card p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .card-meta {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        .card-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* Tools Section */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .tool-card {
-            background: var(--card);
-            border: 2px solid var(--border);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: all 0.3s;
+            background: var(--card); border: 2px solid var(--border);
+            border-radius: 0.75rem; padding: 1.5rem; transition: all 0.3s;
         }
-
-        .tool-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
+        .tool-card:hover { border-color: var(--primary); transform: translateY(-2px); }
         .tool-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg);
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            font-size: 1.25rem;
+            width: 48px; height: 48px; background: var(--bg);
+            border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1rem; color: var(--primary); font-size: 1.25rem;
         }
+        .tool-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .tool-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem; }
 
-        .tool-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tool-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-        }
-
-        /* Community Section */
         .community-preview {
             background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            border: 2px solid #bbf7d0;
-            border-radius: 1rem;
-            padding: 2rem;
+            border: 2px solid #bbf7d0; border-radius: 1rem; padding: 2rem;
         }
-
-        .discussion-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
+        .discussion-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
         .discussion-item {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--secondary);
-            display: flex;
-            gap: 1rem;
-            align-items: start;
+            background: white; padding: 1.25rem; border-radius: 0.5rem;
+            border-left: 4px solid var(--secondary); display: flex; gap: 1rem; align-items: start;
         }
-
         .discussion-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            flex-shrink: 0;
+            width: 40px; height: 40px; background: var(--secondary); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 600; flex-shrink: 0;
         }
+        .discussion-content h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .discussion-content p { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem; }
+        .discussion-meta { font-size: 0.8rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
 
-        .discussion-content h4 {
-            font-size: 0.95rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .discussion-content p {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .discussion-meta {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Modal */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 1rem;
         }
-
-        .modal.active {
-            display: flex;
-        }
-
+        .modal.active { display: flex; }
         .modal-content {
-            background: white;
-            border-radius: 1rem;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
+            background: white; border-radius: 1rem; max-width: 800px; width: 100%;
+            max-height: 90vh; overflow-y: auto; position: relative;
         }
-
         .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg);
+            padding: 1.5rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; background: var(--bg);
         }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
+        .modal-body { padding: 1.5rem; }
         .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.5rem;
-            transition: all 0.2s;
+            background: none; border: none; font-size: 1.5rem; cursor: pointer;
+            color: var(--text-light); width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;
         }
+        .close-btn:hover { background: var(--border); color: var(--text); }
 
-        .close-btn:hover {
-            background: var(--border);
-            color: var(--text);
-        }
-
-        /* Rubric Builder */
-        .rubric-builder {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .rubric-row {
-            display: grid;
-            grid-template-columns: 150px 1fr 1fr 1fr;
-            gap: 1rem;
-            align-items: center;
-            padding: 1rem;
-            background: var(--bg);
-            border-radius: 0.5rem;
-        }
-
-        .rubric-row.header {
-            font-weight: 600;
-            background: var(--primary);
-            color: white;
-        }
-
-        .rubric-cell {
-            padding: 0.5rem;
-        }
-
-        select, input, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 0.375rem;
-            font-family: inherit;
-        }
-
-        /* Inquiry Steps */
-        .inquiry-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
+        .inquiry-steps { display: flex; flex-direction: column; gap: 1.5rem; }
         .step {
-            display: flex;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg);
-            border-radius: 0.75rem;
-            border-left: 4px solid var(--primary);
+            display: flex; gap: 1rem; padding: 1.5rem; background: var(--bg);
+            border-radius: 0.75rem; border-left: 4px solid var(--primary);
         }
-
         .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
+            width: 40px; height: 40px; background: var(--primary); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; flex-shrink: 0;
         }
-
-        .step-content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .step-content p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
+        .step-content h3 { margin-bottom: 0.5rem; color: var(--primary); }
+        .step-content p { color: var(--text-light); font-size: 0.95rem; }
         .example-box {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border);
+            margin-top: 1rem; padding: 1rem; background: white;
+            border-radius: 0.5rem; border: 1px solid var(--border);
         }
+        .example-box strong { color: var(--secondary); font-size: 0.875rem; text-transform: uppercase; }
 
-        .example-box strong {
-            color: var(--secondary);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Mobile Nav */
         .mobile-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 0.75rem;
-            box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1);
-            z-index: 100;
-            justify-content: space-around;
+            display: none; position: fixed; bottom: 0; left: 0; right: 0;
+            background: white; padding: 0.75rem; box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1);
+            z-index: 100; justify-content: space-around;
         }
-
         .mobile-nav a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.25rem;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.75rem;
-            padding: 0.5rem;
+            display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+            color: var(--text-light); text-decoration: none; font-size: 0.75rem; padding: 0.5rem;
         }
+        .mobile-nav a.active { color: var(--primary); }
+        .mobile-nav i { font-size: 1.25rem; }
 
-        .mobile-nav a.active {
-            color: var(--primary);
-        }
-
-        .mobile-nav i {
-            font-size: 1.25rem;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-
-            .quick-access {
-                grid-template-columns: 1fr;
-                margin-top: -1rem;
-            }
-
-            .mobile-nav {
-                display: flex;
-            }
-
-            .container {
-                padding-bottom: 5rem;
-            }
-
-            .rubric-row {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-
-            .rubric-row.header {
-                display: none;
-            }
+            .nav-desktop { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 1.75rem; }
+            .quick-access { grid-template-columns: 1fr; margin-top: -1rem; }
+            .mobile-nav { display: flex; }
+            .container { padding-bottom: 5rem; }
         }
 
-        /* Print styles for resources */
-        @media print {
-            .header, .mobile-nav, .hero-actions, .btn {
-                display: none;
-            }
-            
-            .card {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-        }
-
-        /* Loading state */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: 0.5rem;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* Utility */
         .text-center { text-align: center; }
         .mt-2 { margin-top: 1rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .hidden { display: none; }
-
-        /* Offline indicator */
-        .offline-banner {
-            background: var(--accent);
-            color: #78350f;
-            padding: 0.75rem;
-            text-align: center;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: none;
+        input, textarea, select {
+            width: 100%; padding: 0.75rem; border: 1px solid var(--border);
+            border-radius: 0.375rem; font-family: inherit; margin-bottom: 1rem;
         }
-
-        .offline-banner.active {
-            display: block;
-        }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .empty-state { text-align: center; padding: 2rem; color: var(--text-light); }
     </style>
 </head>
 <body>
-    <!-- Offline Banner -->
-    <div class="offline-banner" id="offlineBanner">
-        <i class="fas fa-wifi-slash"></i> Modo offline activo. Algunos recursos están disponibles sin conexión.
-    </div>
-
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
@@ -726,7 +246,6 @@
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <div class="badge">
@@ -734,21 +253,18 @@
                 Validado por Especialista CyT - UGEL Huaylas
             </div>
             <h1>Enseña Ciencia con Seguridad y Sentido</h1>
-            <p>Recursos prácticos, secuencias validadas y acompañamiento pedagógico real para docentes de Ciencia y Tecnología en contexto rural y urbano.</p>
+            <p>Recursos prácticos, secuencias validadas y acompañamiento pedagógico real para docentes de Ciencia y Tecnología.</p>
             <div class="hero-actions">
                 <a href="#secuencias" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i>
-                    Ver Secuencias Listas
+                    <i class="fas fa-rocket"></i> Ver Secuencias Listas
                 </a>
                 <a href="#indagacion" class="btn btn-secondary">
-                    <i class="fas fa-compass"></i>
-                    Guía de Indagación
+                    <i class="fas fa-compass"></i> Guía de Indagación
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Quick Access -->
     <div class="quick-access">
         <div class="quick-card" onclick="scrollToSection('secuencias')">
             <i class="fas fa-clock"></i>
@@ -765,7 +281,7 @@
             <h3>Diseñar indagación</h3>
             <p>Paso a paso con ejemplos reales</p>
         </div>
-        <div class="quick-card" onclick="openModal('help')">
+        <div class="quick-card" onclick="openModal('new-question')">
             <i class="fas fa-headset"></i>
             <h3>Necesito ayuda</h3>
             <p>Consultar al especialista</p>
@@ -773,212 +289,56 @@
     </div>
 
     <div class="container">
-        <!-- Sequences Section -->
         <section id="secuencias" class="section">
             <div class="section-header">
                 <h2>Banco de Secuencias Didácticas</h2>
-                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad. Incluyen propósito, actividad central, evidencias y criterios.</p>
+                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad.</p>
             </div>
-            
-            <div class="cards-grid" id="sequencesGrid">
-                <!-- Generated by JS -->
-            </div>
-            
-            <div class="text-center mt-2">
-                <button class="btn btn-secondary" onclick="loadMoreSequences()">
-                    <i class="fas fa-plus"></i> Cargar más secuencias
-                </button>
-            </div>
+            <div class="cards-grid" id="sequencesGrid"></div>
         </section>
 
-        <!-- Inquiry Section -->
         <section id="indagacion" class="section">
             <div class="section-header">
                 <h2>Guía Práctica de Indagación Científica</h2>
-                <p>Del problema a la conclusión: estructura clara con ejemplos reales de aula y errores comunes.</p>
+                <p>Del problema a la conclusión: estructura clara con ejemplos reales.</p>
             </div>
-
-            <div class="inquiry-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Planteamiento del Problema</h3>
-                        <p>Formular una pregunta investigable, clara y conectada con el contexto del estudiante.</p>
-                        <div class="example-box">
-                            <strong>Ejemplo válido:</strong> "¿Cómo afecta la salinidad del agua del río a la flotación de objetos?"<br>
-                            <strong>Error común:</strong> "Investigar sobre el agua" (muy amplia) o "¿El agua es importante?" (no investigable).
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Identificación de Variables</h3>
-                        <p>Variable independiente (lo que cambias), dependiente (lo que mides) y controladas (lo que mantienes constante).</p>
-                        <div class="example-box">
-                            <strong>Ejemplo:</strong> En "¿Cómo afecta la temperatura a la velocidad de disolución del azúcar?"<br>
-                            • Independiente: Temperatura del agua<br>
-                            • Dependiente: Tiempo de disolución<br>
-                            • Controladas: Cantidad de agua, tipo de azúcar, agitación
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Hipótesis Argumentada</h3>
-                        <p>Respuesta tentativa basada en conocimiento previo, expresada como relación entre variables.</p>
-                        <div class="example-box">
-                            <strong>Buena hipótesis:</strong> "Si aumenta la temperatura del agua, entonces el azúcar se disolverá más rápido porque las partículas se mueven con mayor energía cinética."<br>
-                            <strong>Hipótesis débil:</strong> "Creo que el azúcar se disuelve en agua caliente."
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Diseño Experimental</h3>
-                        <p>Procedimiento claro, materiales accesibles y consideración de seguridad. Pensar en "¿qué puede salir mal?"</p>
-                        <div class="example-box">
-                            <strong>Consejo práctico:</strong> Usa materiales del entorno (agua de río, tierra local, plantas nativas). Si no hay termómetro, usa la percepción táctil (agua fría, tibia, caliente) pero registra consistentemente.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>Recolección de Evidencias</h3>
-                        <p>Datos cuantitativos (mediciones) y cualitativos (observaciones). Registro sistemático en tablas.</p>
-                        <div class="example-box">
-                            <strong>Evidencia válida:</strong> Tabla con 3 repeticiones, unidades claras, observaciones inesperadas anotadas (ej. "el azúcar se derramó en el ensayo 2").
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h3>Análisis y Conclusión</h3>
-                        <p>¿Los datos apoyan la hipótesis? ¿Qué limitaciones tuvo el experimento? ¿Qué preguntas quedan?</p>
-                        <div class="example-box">
-                            <strong>Conclusión completa:</strong> "Los datos muestran que... Esto confirma/rechaza nuestra hipótesis porque... Una limitación fue... Para mejorar podríamos..."
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-2">
-                <button class="btn btn-primary" onclick="openModal('inquiry-template')">
-                    <i class="fas fa-download"></i> Descargar plantilla de indagación
-                </button>
-            </div>
+            <div class="inquiry-steps" id="inquirySteps"></div>
         </section>
 
-        <!-- Evaluation Section -->
         <section id="evaluacion" class="section">
             <div class="section-header">
                 <h2>Evaluación Clara y Usable</h2>
-                <p>Rúbricas, listas de cotejo y ejemplos de evidencias. Conexión directa: actividad ↔ evidencia ↔ criterio.</p>
+                <p>Rúbricas y herramientas conectadas a competencias reales.</p>
             </div>
-
             <div class="tools-grid">
                 <div class="tool-card" onclick="openModal('rubric-builder')">
-                    <div class="tool-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
+                    <div class="tool-icon"><i class="fas fa-tools"></i></div>
                     <h3>Constructor de Rúbricas</h3>
-                    <p>Crea rúbricas específicas para competencias de indagación. Incluye niveles de desempeño descriptivos.</p>
+                    <p>Crea rúbricas específicas para competencias de indagación.</p>
                     <button class="btn btn-primary btn-small">Usar constructor</button>
                 </div>
-
-                <div class="tool-card" onclick="openModal('evidence-gallery')">
-                    <div class="tool-icon">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <h3>Galería de Evidencias</h3>
-                    <p>Ejemplos reales de cuadernos de campo, informes y presentaciones de estudiantes con anotaciones.</p>
-                    <button class="btn btn-primary btn-small">Ver ejemplos</button>
-                </div>
-
-                <div class="tool-card" onclick="openModal('feedback-templates')">
-                    <div class="tool-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Retroalimentación Efectiva</h3>
-                    <p>Frases modelo para retroalimentar procesos científicos. De lo general a lo específico.</p>
-                    <button class="btn btn-primary btn-small">Ver frases</button>
-                </div>
-
-                <div class="tool-card" onclick="openModal('alignment-check')">
-                    <div class="tool-icon">
-                        <i class="fas fa-link"></i>
-                    </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-link"></i></div>
                     <h3>Verificador de Alineación</h3>
-                    <p>Revisa si tu actividad, evidencia y criterio están realmente conectados. Evita evaluar lo que no se enseñó.</p>
+                    <p>Revisa si actividad, evidencia y criterio están conectados.</p>
                     <button class="btn btn-primary btn-small">Verificar ahora</button>
                 </div>
             </div>
-
-            <div class="card mt-2" style="margin-top: 2rem;">
-                <div class="card-body">
-                    <h3><i class="fas fa-lightbulb" style="color: var(--accent);"></i> Ejemplo de Alineación Correcta</h3>
-                    <div style="display: grid; gap: 1rem; margin-top: 1rem;">
-                        <div style="padding: 1rem; background: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
-                            <strong>Actividad:</strong> Diseñan un filtro de agua con materiales locales y prueban su eficacia.
-                        </div>
-                        <div style="text-align: center; color: var(--text-light);">
-                            <i class="fas fa-arrow-down"></i> Genera evidencia de:
-                        </div>
-                        <div style="padding: 1rem; background: #eff6ff; border-radius: 0.5rem; border-left: 4px solid var(--primary);">
-                            <strong>Evidencia:</strong> Registro fotográfico del proceso + tabla de comparación antes/después del filtrado.
-                        </div>
-                        <div style="text-align: center; color: var(--text-light);">
-                            <i class="fas fa-arrow-down"></i> Evaluado con criterio:
-                        </div>
-                        <div style="padding: 1rem; background: #fef3c7; border-radius: 0.5rem; border-left: 4px solid var(--accent);">
-                            <strong>Criterio:</strong> "Propone soluciones tecnológicas sostenibles evaluando su eficacia con datos cuantitativos."
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <!-- Technology Section -->
         <section id="tecnologia" class="section">
             <div class="section-header">
                 <h2>Tecnología con Sentido Pedagógico</h2>
-                <p>Recursos curados: cada herramienta indica para qué competencia sirve y cómo usarla sin conexión.</p>
+                <p>Recursos curados: cada herramienta indica para qué competencia sirve.</p>
             </div>
-
-            <div class="cards-grid" id="techGrid">
-                <!-- Generated by JS -->
-            </div>
-
-            <div class="card" style="background: #fef3c7; border-color: #f59e0b; margin-top: 2rem;">
-                <div class="card-body">
-                    <h3><i class="fas fa-wifi-slash"></i> Opciones Offline / Bajo Recurso</h3>
-                    <p style="margin: 1rem 0;">Para zonas sin conectividad estable:</p>
-                    <ul style="margin-left: 1.5rem; color: var(--text-light);">
-                        <li>Simulaciones descargables de PhET (funcionan sin internet)</li>
-                        <li>Videos descargados en pendrive (solicitar al especialista)</li>
-                        <li>Actividades con celular básico: grabar audio de hipótesis, fotos de proceso</li>
-                        <li>Apps livianas: Science Journal (Google) - funciona offline</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="cards-grid" id="techGrid"></div>
         </section>
 
-        <!-- Community Section -->
         <section id="comunidad" class="section">
             <div class="section-header">
                 <h2>Comunidad Docente Guiada</h2>
-                <p>Espacio moderado por el Especialista de CyT. Intercambio estructurado, no foro caótico.</p>
+                <p>Espacio moderado por el Especialista de CyT. Consultas reales de docentes.</p>
             </div>
-
             <div class="community-preview">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <h3 style="color: var(--secondary);"><i class="fas fa-comments"></i> Consultas Recientes</h3>
@@ -986,224 +346,108 @@
                         <i class="fas fa-plus"></i> Nueva consulta
                     </button>
                 </div>
-
-                <div class="discussion-list">
-                    <div class="discussion-item">
-                        <div class="discussion-avatar">MR</div>
-                        <div class="discussion-content">
-                            <h4>¿Cómo evaluar la competencia "Diseña" sin materiales costosos?</h4>
-                            <p>Trabajo en una IE rural y no tenemos kit de robótica. ¿Qué actividades pueden evidenciar diseño tecnológico?</p>
-                            <div class="discussion-meta">
-                                <span><i class="fas fa-user"></i> Prof. María R. - 2° Sec</span>
-                                <span><i class="fas fa-check-circle"></i> Respondido por Especialista</span>
-                                <span><i class="fas fa-clock"></i> Hace 2 días</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="discussion-item">
-                        <div class="discussion-avatar">CL</div>
-                        <div class="discussion-content">
-                            <h4>Duda sobre variables controladas en 1° de secundaria</h4>
-                            <p>Mis estudiantes confunden variable controlada con independiente. ¿Alguna estrategia para aclarar esto?</p>
-                            <div class="discussion-meta">
-                                <span><i class="fas fa-user"></i> Prof. Carlos L. - 1° Sec</span>
-                                <span><i class="fas fa-comment"></i> 3 respuestas de colegas</span>
-                                <span><i class="fas fa-clock"></i> Hace 5 días</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="discussion-item">
-                        <div class="discussion-avatar">AP</div>
-                        <div class="discussion-content">
-                            <h4>Comparto secuencia: Ecosistemas locales con enfoque indagación</h4>
-                            <p>Adapté la secuencia del banco para trabajar con las quebradas de mi zona. Les comparto los ajustes...</p>
-                            <div class="discussion-meta">
-                                <span><i class="fas fa-user"></i> Prof. Ana P. - 3° Sec</span>
-                                <span><i class="fas fa-star"></i> Destacado por especialista</span>
-                                <span><i class="fas fa-clock"></i> Hace 1 semana</span>
-                            </div>
-                        </div>
-                    </div>
+                <div id="loadingQuestions" style="text-align: center; padding: 2rem;">
+                    <div class="loading"></div>
+                    <p style="margin-top: 1rem; color: var(--text-light);">Cargando consultas...</p>
                 </div>
-
-                <div style="text-align: center; margin-top: 1.5rem;">
-                    <button class="btn btn-secondary" onclick="openModal('community-rules')">
-                        <i class="fas fa-info-circle"></i> Ver normas de participación
-                    </button>
-                </div>
+                <div class="discussion-list" id="questionsList" style="display: none;"></div>
             </div>
         </section>
 
-        <!-- Footer -->
         <footer style="text-align: center; padding: 3rem 0; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 4rem;">
             <p style="margin-bottom: 0.5rem;"><strong>UGEL Huaylas - Área de Ciencia y Tecnología</strong></p>
-            <p style="font-size: 0.875rem;">Plataforma validada por el Especialista de CyT | Actualizada: 2024</p>
-            <p style="font-size: 0.875rem; margin-top: 1rem;">
-                <i class="fas fa-envelope"></i> especialista.cyt@ugelhuaylas.gob.pe
-            </p>
+            <p style="font-size: 0.875rem;">Plataforma validada por el Especialista de CyT</p>
         </footer>
     </div>
 
-    <!-- Mobile Navigation -->
     <nav class="mobile-nav">
-        <a href="#secuencias" class="active">
-            <i class="fas fa-book-open"></i>
-            <span>Secuencias</span>
-        </a>
-        <a href="#indagacion">
-            <i class="fas fa-microscope"></i>
-            <span>Indagación</span>
-        </a>
-        <a href="#evaluacion">
-            <i class="fas fa-clipboard-check"></i>
-            <span>Evaluar</span>
-        </a>
-        <a href="#comunidad">
-            <i class="fas fa-users"></i>
-            <span>Ayuda</span>
-        </a>
+        <a href="#secuencias" class="active"><i class="fas fa-book-open"></i><span>Secuencias</span></a>
+        <a href="#indagacion"><i class="fas fa-microscope"></i><span>Indagación</span></a>
+        <a href="#evaluacion"><i class="fas fa-clipboard-check"></i><span>Evaluar</span></a>
+        <a href="#comunidad"><i class="fas fa-users"></i><span>Ayuda</span></a>
     </nav>
 
-    <!-- Modals -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modalTitle">Título</h3>
                 <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Content injected by JS -->
-            </div>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
     <script>
-        // Data
+        // ==================== CONFIGURACIÓN FIREBASE ====================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrhIGOJxb4DbF9ElLt1x6IV1KwO3epGCo",
+            authDomain: "cyt-huaylas-web.firebaseapp.com",
+            projectId: "cyt-huaylas-web",
+            storageBucket: "cyt-huaylas-web.firebasestorage.app",
+            messagingSenderId: "663512465593",
+            appId: "1:663512465593:web:cd4a6601f51b6d48505b68"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ==================== DATOS ====================
         const sequences = [
             {
-                id: 1,
-                title: "¿Por qué se erosiona nuestra quebrada?",
-                grade: "1° Secundaria",
-                area: "Indagación científica",
-                duration: "4 sesiones",
-                context: "Rural/Urbano",
-                description: "Secuencia completa de indagación sobre erosión del suelo usando el entorno local. Incluye salida de campo, toma de muestras y propuesta de soluciones.",
-                tags: ["indagacion"],
-                validated: true
+                id: 1, title: "¿Por qué se erosiona nuestra quebrada?", grade: "1° Secundaria",
+                area: "Indagación científica", duration: "4 sesiones", context: "Rural/Urbano",
+                description: "Secuencia completa sobre erosión del suelo usando el entorno local. Incluye salida de campo y propuesta de soluciones.",
+                tags: ["indagacion"], validated: true
             },
             {
-                id: 2,
-                title: "Diseño de un irrigador para la huerta escolar",
-                grade: "2° Secundaria",
-                area: "Diseño tecnológico",
-                duration: "6 sesiones",
-                context: "Rural",
-                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales (botellas, mangueras recicladas) y evalúan eficacia.",
-                tags: ["evaluacion"],
-                validated: true
+                id: 2, title: "Diseño de un irrigador para la huerta escolar", grade: "2° Secundaria",
+                area: "Diseño tecnológico", duration: "6 sesiones", context: "Rural",
+                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales y evalúan eficacia.",
+                tags: ["evaluacion"], validated: true
             },
             {
-                id: 3,
-                title: "¿El agua de mi comunidad es potable?",
-                grade: "3° Secundaria",
-                area: "Indagación científica",
-                duration: "5 sesiones",
-                context: "Rural/Urbano",
-                description: "Análisis físico-químico básico del agua usando reactivos caseros y observación. Conexión con derecho al agua y propuestas de tratamiento.",
-                tags: ["indagacion", "evaluacion"],
-                validated: true
+                id: 3, title: "¿El agua de mi comunidad es potable?", grade: "3° Secundaria",
+                area: "Indagación científica", duration: "5 sesiones", context: "Rural/Urbano",
+                description: "Análisis físico-químico básico del agua usando reactivos caseros. Conexión con derecho al agua.",
+                tags: ["indagacion", "evaluacion"], validated: true
+            }
+        ];
+
+        const inquirySteps = [
+            {
+                num: 1, title: "Planteamiento del Problema",
+                desc: "Formular una pregunta investigable, clara y conectada con el contexto del estudiante.",
+                example: "Ejemplo válido: '¿Cómo afecta la salinidad del agua del río a la flotación de objetos?'\nError común: 'Investigar sobre el agua' (muy amplia)"
             },
             {
-                id: 4,
-                title: "Simulando ecosistemas: El equilibrio natural",
-                grade: "1° Secundaria",
-                area: "Explicación científica",
-                duration: "3 sesiones",
-                context: "Urbano",
-                description: "Uso de simulador PhET para entender cadenas alimentarias antes de salida de campo. Incluye versión offline.",
-                tags: ["tecnologia"],
-                validated: true
+                num: 2, title: "Identificación de Variables",
+                desc: "Variable independiente (lo que cambias), dependiente (lo que mides) y controladas (lo que mantienes constante).",
+                example: "Ejemplo: En '¿Cómo afecta la temperatura a la velocidad de disolución?'\n• Independiente: Temperatura\n• Dependiente: Tiempo de disolución\n• Controladas: Cantidad de agua, tipo de azúcar"
             },
             {
-                id: 5,
-                title: "Construyendo un termómetro casero",
-                grade: "2° Secundaria",
-                area: "Indagación científica",
-                duration: "2 sesiones",
-                context: "Rural",
-                description: "Diseño y calibración de termómetros con materiales de bajo costo. Comparación con termómetro estándar y análisis de error.",
-                tags: ["indagacion"],
-                validated: true
-            },
-            {
-                id: 6,
-                title: "Evaluando mi huella ecológica",
-                grade: "3° Secundaria",
-                area: "Competencias ciudadanas",
-                duration: "3 sesiones",
-                context: "Urbano",
-                description: "Cálculo de huella ecológica personal y grupal. Propuesta de acciones de mitigación concretas para la escuela.",
-                tags: ["evaluacion"],
-                validated: true
+                num: 3, title: "Hipótesis Argumentada",
+                desc: "Respuesta tentativa basada en conocimiento previo, expresada como relación entre variables.",
+                example: "Buena hipótesis: 'Si aumenta la temperatura, entonces el azúcar se disolverá más rápido porque...'\nHipótesis débil: 'Creo que el azúcar se disuelve en agua caliente.'"
             }
         ];
 
         const techResources = [
             {
-                title: "PhET Simulaciones",
-                type: "Simulador",
-                competency: "Explica el mundo natural",
-                offline: true,
-                description: "Simulaciones interactivas de física, química y biología. Funcionan offline si se descargan previamente.",
+                title: "PhET Simulaciones", type: "Simulador",
+                competency: "Explica el mundo natural", offline: true,
+                description: "Simulaciones interactivas de física, química y biología. Funcionan offline.",
                 useCase: "Antes de experimentación real o cuando no hay materiales"
             },
             {
-                title: "Science Journal (Google)",
-                type: "App móvil",
-                competency: "Indaga mediante métodos científicos",
-                offline: true,
-                description: "Usa sensores del celular (luz, sonido, aceleración) para recolectar datos. Exporta a CSV.",
+                title: "Science Journal", type: "App móvil",
+                competency: "Indaga mediante métodos científicos", offline: true,
+                description: "Usa sensores del celular para recolectar datos. Exporta a CSV.",
                 useCase: "Toma de datos en salidas de campo sin equipo especializado"
-            },
-            {
-                title: "Canva Educativo",
-                type: "Diseño",
-                competency: "Comunica ideas científicas",
-                offline: false,
-                description: "Creación de infografías, pósters científicos y presentaciones. Plantillas para informes de laboratorio.",
-                useCase: "Comunicación de resultados de indagación"
-            },
-            {
-                title: "Videos de UNSCH - CyT",
-                type: "Video",
-                competency: "Explica el mundo natural",
-                offline: true,
-                description: "Videos explicativos de conceptos de física, química y biología contextualizados a la región.",
-                useCase: "Introducción a conceptos abstractos"
             }
         ];
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSequences();
-            renderTech();
-            checkOffline();
-            
-            // Smooth scroll for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-        });
-
-        // Render functions
+        // ==================== FUNCIONES ====================
         function renderSequences() {
             const grid = document.getElementById('sequencesGrid');
             grid.innerHTML = sequences.map(seq => `
@@ -1211,9 +455,8 @@
                     <div class="card-header">
                         <div>
                             <span class="card-tag tag-${seq.tags[0]}">${seq.area}</span>
-                            ${seq.validated ? '<span style="color: var(--secondary); font-size: 0.75rem; margin-left: 0.5rem;"><i class="fas fa-check-circle"></i> Validado</span>' : ''}
+                            ${seq.validated ? '<span style="color: var(--secondary); font-size: 0.75rem; margin-left: 0.5rem;"><i class="fas fa-check-circle"></i></span>' : ''}
                         </div>
-                        <i class="fas fa-bookmark" style="color: var(--border);"></i>
                     </div>
                     <div class="card-body">
                         <h3>${seq.title}</h3>
@@ -1221,7 +464,22 @@
                         <div class="card-meta">
                             <span><i class="fas fa-graduation-cap"></i> ${seq.grade}</span>
                             <span><i class="fas fa-clock"></i> ${seq.duration}</span>
-                            <span><i class="fas fa-map-marker-alt"></i> ${seq.context}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderInquirySteps() {
+            const container = document.getElementById('inquirySteps');
+            container.innerHTML = inquirySteps.map(step => `
+                <div class="step">
+                    <div class="step-number">${step.num}</div>
+                    <div class="step-content">
+                        <h3>${step.title}</h3>
+                        <p>${step.desc}</p>
+                        <div class="example-box">
+                            <strong>Ejemplo:</strong><br>${step.example.replace(/\n/g, '<br>')}
                         </div>
                     </div>
                 </div>
@@ -1234,15 +492,13 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-tag tag-tecnologia">${tech.type}</span>
-                        ${tech.offline ? '<span style="color: var(--secondary); font-size: 0.75rem;"><i class="fas fa-wifi-slash"></i> Offline</span>' : ''}
+                        ${tech.offline ? '<span style="color: var(--secondary); font-size: 0.75rem;"><i class="fas fa-wifi-slash"></i></span>' : ''}
                     </div>
                     <div class="card-body">
                         <h3>${tech.title}</h3>
-                        <p style="font-size: 0.8rem; color: var(--primary); margin-bottom: 0.5rem;">
-                            <i class="fas fa-bullseye"></i> ${tech.competency}
-                        </p>
+                        <p style="font-size: 0.8rem; color: var(--primary);"><i class="fas fa-bullseye"></i> ${tech.competency}</p>
                         <p>${tech.description}</p>
-                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg); border-radius: 0.5rem; font-size: 0.875rem;">
+                        <div style="padding: 0.75rem; background: var(--bg); border-radius: 0.5rem; font-size: 0.875rem;">
                             <strong>¿Cuándo usarlo?</strong> ${tech.useCase}
                         </div>
                     </div>
@@ -1250,7 +506,87 @@
             `).join('');
         }
 
-        // Modal functions
+        // ==================== FIREBASE: CARGAR CONSULTAS ====================
+        function loadQuestions() {
+            const loadingDiv = document.getElementById('loadingQuestions');
+            const listDiv = document.getElementById('questionsList');
+            
+            db.collection('questions')
+                .orderBy('timestamp', 'desc')
+                .limit(10)
+                .get()
+                .then(snapshot => {
+                    loadingDiv.style.display = 'none';
+                    listDiv.style.display = 'flex';
+                    
+                    if (snapshot.empty) {
+                        listDiv.innerHTML = '<div class="empty-state"><i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i><p>No hay consultas aún. ¡Sé el primero en preguntar!</p></div>';
+                        return;
+                    }
+                    
+                    listDiv.innerHTML = snapshot.docs.map(doc => {
+                        const data = doc.data();
+                        const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('es-ES') : 'Reciente';
+                        const initials = data.author ? data.author.substring(0, 2).toUpperCase() : 'AN';
+                        
+                        return `
+                            <div class="discussion-item">
+                                <div class="discussion-avatar">${initials}</div>
+                                <div class="discussion-content">
+                                    <h4>${data.title}</h4>
+                                    <p>${data.content.substring(0, 100)}${data.content.length > 100 ? '...' : ''}</p>
+                                    <div class="discussion-meta">
+                                        <span><i class="fas fa-user"></i> ${data.author} - ${data.grade}</span>
+                                        <span><i class="fas fa-clock"></i> ${date}</span>
+                                        ${data.answered ? '<span style="color: var(--secondary);"><i class="fas fa-check-circle"></i> Respondido</span>' : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                })
+                .catch(error => {
+                    console.error("Error cargando consultas:", error);
+                    loadingDiv.innerHTML = '<p style="color: #dc2626;">Error al cargar. Recarga la página.</p>';
+                });
+        }
+
+        // ==================== FIREBASE: ENVIAR CONSULTA ====================
+        function submitQuestion(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<div class="loading" style="width: 16px; height: 16px; border-width: 2px; margin-right: 0.5rem;"></div> Enviando...';
+            submitBtn.disabled = true;
+            
+            const questionData = {
+                title: form.title.value,
+                content: form.content.value,
+                type: form.type.value,
+                author: form.author.value || 'Anónimo',
+                grade: form.grade.value,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                answered: false
+            };
+            
+            db.collection('questions').add(questionData)
+                .then(() => {
+                    form.reset();
+                    closeModal();
+                    alert('¡Consulta enviada exitosamente! El especialista responderá pronto.');
+                    loadQuestions();
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert('Error al enviar: ' + error.message);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        }
+
+        // ==================== MODALES ====================
         function openModal(type) {
             const modal = document.getElementById('modal');
             const title = document.getElementById('modalTitle');
@@ -1259,146 +595,68 @@
             modal.classList.add('active');
             
             switch(type) {
-                case 'rubric-builder':
-                    title.textContent = 'Constructor de Rúbricas';
-                    body.innerHTML = `
-                        <div class="rubric-builder">
-                            <div style="margin-bottom: 1rem;">
-                                <label>Competencia a evaluar:</label>
-                                <select id="competenciaSelect" onchange="updateRubric()">
-                                    <option value="indaga">Indaga mediante métodos científicos</option>
-                                    <option value="explica">Explica el mundo natural</option>
-                                    <option value="disena">Diseña y construye soluciones tecnológicas</option>
-                                </select>
-                            </div>
-                            
-                            <div class="rubric-row header">
-                                <div class="rubric-cell">Criterio</div>
-                                <div class="rubric-cell">Inicial (1)</div>
-                                <div class="rubric-cell">Proceso (2)</div>
-                                <div class="rubric-cell">Satisfactorio (3)</div>
-                            </div>
-                            
-                            <div id="rubricContent">
-                                <!-- Generated by JS -->
-                            </div>
-                            
-                            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="downloadRubric()">
-                                <i class="fas fa-download"></i> Descargar rúbrica
-                            </button>
-                        </div>
-                    `;
-                    updateRubric();
-                    break;
-                    
-                case 'inquiry-template':
-                    title.textContent = 'Plantilla de Indagación';
-                    body.innerHTML = `
-                        <div style="background: var(--bg); padding: 2rem; border-radius: 0.5rem; font-family: 'Merriweather', serif;">
-                            <h2 style="text-align: center; margin-bottom: 2rem;">Formato de Indagación Científica</h2>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <p><strong>Título:</strong> _________________________________________</p>
-                                <p><strong>Grado:</strong> _______ <strong>Fecha:</strong> ___________</p>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>1. Pregunta de Investigación</h4>
-                                <div style="border: 1px solid #ccc; min-height: 60px; padding: 0.5rem; background: white;"></div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>2. Hipótesis (relación entre variables)</h4>
-                                <div style="border: 1px solid #ccc; min-height: 60px; padding: 0.5rem; background: white;"></div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>3. Variables</h4>
-                                <p>Independiente: ___________________________</p>
-                                <p>Dependiente: ____________________________</p>
-                                <p>Controladas: ____________________________</p>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>4. Materiales</h4>
-                                <div style="border: 1px solid #ccc; min-height: 80px; padding: 0.5rem; background: white;"></div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>5. Procedimiento (pasos numerados)</h4>
-                                <div style="border: 1px solid #ccc; min-height: 100px; padding: 0.5rem; background: white;"></div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>6. Registro de Datos</h4>
-                                <table style="width: 100%; border-collapse: collapse; background: white;">
-                                    <tr style="background: #e5e7eb;">
-                                        <th style="border: 1px solid #ccc; padding: 0.5rem;">Ensayo</th>
-                                        <th style="border: 1px solid #ccc; padding: 0.5rem;">Variable independiente</th>
-                                        <th style="border: 1px solid #ccc; padding: 0.5rem;">Variable dependiente</th>
-                                        <th style="border: 1px solid #ccc; padding: 0.5rem;">Observaciones</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;">1</td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;">2</td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                        <td style="border: 1px solid #ccc; padding: 0.5rem;"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <h4>7. Conclusión</h4>
-                                <div style="border: 1px solid #ccc; min-height: 80px; padding: 0.5rem; background: white;"></div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary" style="margin-top: 1rem;" onclick="window.print()">
-                            <i class="fas fa-print"></i> Imprimir / Guardar PDF
-                        </button>
-                    `;
-                    break;
-                    
                 case 'new-question':
                     title.textContent = 'Nueva Consulta a la Comunidad';
                     body.innerHTML = `
                         <form onsubmit="submitQuestion(event)">
-                            <div style="margin-bottom: 1rem;">
-                                <label>Título de tu consulta:</label>
-                                <input type="text" placeholder="Ej: ¿Cómo evaluar...?" required>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <label>Describe tu situación:</label>
-                                <textarea rows="4" placeholder="Contexto de tu escuela, grado, duda específica..." required></textarea>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <label>Tipo de consulta:</label>
-                                <select>
-                                    <option>Diseño de sesión</option>
-                                    <option>Evaluación/Evidencias</option>
-                                    <option>Indagación científica</option>
-                                    <option>Uso de recursos</option>
-                                    <option>Otro</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane"></i> Enviar al especialista
+                            <label>Título de tu consulta:</label>
+                            <input type="text" name="title" placeholder="Ej: ¿Cómo evaluar diseño tecnológico sin materiales?" required>
+                            
+                            <label>Describe tu situación:</label>
+                            <textarea name="content" rows="4" placeholder="Contexto de tu escuela, grado, duda específica..." required></textarea>
+                            
+                            <label>Tu nombre:</label>
+                            <input type="text" name="author" placeholder="Prof. Juan Pérez">
+                            
+                            <label>Grado que enseñas:</label>
+                            <select name="grade" required>
+                                <option value="">Selecciona...</option>
+                                <option value="1° Secundaria">1° Secundaria</option>
+                                <option value="2° Secundaria">2° Secundaria</option>
+                                <option value="3° Secundaria">3° Secundaria</option>
+                                <option value="4° Secundaria">4° Secundaria</option>
+                                <option value="5° Secundaria">5° Secundaria</option>
+                                <option value="Todos">Todos los grados</option>
+                            </select>
+                            
+                            <label>Tipo de consulta:</label>
+                            <select name="type" required>
+                                <option value="Diseño de sesión">Diseño de sesión</option>
+                                <option value="Evaluación">Evaluación/Evidencias</option>
+                                <option value="Indagación">Indagación científica</option>
+                                <option value="Recursos">Uso de recursos</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-paper-plane"></i> Enviar consulta
                             </button>
-                            <p style="font-size: 0.875rem; color: var(--text-light); margin-top: 1rem;">
-                                <i class="fas fa-info-circle"></i> Las consultas son respondidas en máximo 48 horas hábiles.
+                            <p style="font-size: 0.875rem; color: var(--text-light); margin-top: 1rem; text-align: center;">
+                                <i class="fas fa-shield-alt"></i> Las consultas son moderadas por el especialista
                             </p>
                         </form>
                     `;
                     break;
                     
+                case 'rubric-builder':
+                    title.textContent = 'Constructor de Rúbricas';
+                    body.innerHTML = `
+                        <div style="background: var(--bg); padding: 1rem; border-radius: 0.5rem;">
+                            <p>Selecciona la competencia:</p>
+                            <select onchange="generateRubric(this.value)" style="margin-top: 0.5rem;">
+                                <option value="">Selecciona...</option>
+                                <option value="indaga">Indaga mediante métodos científicos</option>
+                                <option value="explica">Explica el mundo natural</option>
+                                <option value="disena">Diseña soluciones tecnológicas</option>
+                            </select>
+                        </div>
+                        <div id="rubricResult" style="margin-top: 1rem;"></div>
+                    `;
+                    break;
+                    
                 default:
                     title.textContent = 'Información';
-                    body.innerHTML = '<p>Contenido en desarrollo. Esta funcionalidad estará disponible próximamente.</p>';
+                    body.innerHTML = '<p>Funcionalidad en desarrollo.</p>';
             }
         }
 
@@ -1406,49 +664,44 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        function updateRubric() {
-            const competency = document.getElementById('competenciaSelect')?.value || 'indaga';
-            const content = document.getElementById('rubricContent');
+        function generateRubric(competency) {
+            const result = document.getElementById('rubricResult');
+            if (!competency) {
+                result.innerHTML = '';
+                return;
+            }
             
             const rubrics = {
                 indaga: [
-                    ['Planteamiento del problema', 'La pregunta no es investigable o es muy amplia', 'La pregunta es investigable pero variables no claras', 'Pregunta clara, investigable con variables identificadas'],
-                    ['Hipótesis', 'No relaciona variables o es una suposición sin base', 'Relaciona variables pero sin justificación', 'Relaciona variables con justificación basada en conocimiento previo'],
-                    ['Diseño experimental', 'Procedimiento confuso o inseguro', 'Procedimiento claro pero omite controles', 'Procedimiento claro, seguro, con variables controladas']
-                ],
-                explica: [
-                    ['Identificación de conceptos', 'No identifica conceptos clave', 'Identifica conceptos pero con errores', 'Identifica correctamente conceptos científicos relevantes'],
-                    ['Relación causa-efecto', 'No establece relaciones', 'Establece relaciones simples', 'Establece relaciones complejas y múltiples causas'],
-                    ['Uso de evidencia', 'No usa evidencia para argumentar', 'Usa evidencia parcialmente', 'Usa evidencia de múltiples fuentes para sustentar explicaciones']
-                ],
-                disena: [
-                    ['Identificación de necesidad', 'No identifica necesidad clara', 'Identifica necesidad pero poco relevante', 'Identifica necesidad real y relevante del contexto'],
-                    ['Propuesta de solución', 'Solución no viable o sin criterios', 'Solución viable pero sin considerar recursos', 'Solución viable, sostenible y adaptada a recursos disponibles'],
-                    ['Evaluación del diseño', 'No evalúa el funcionamiento', 'Evalúa cualitativamente', 'Evalúa con datos cuantitativos y propone mejoras']
+                    ['Planteamiento del problema', 'Pregunta no investigable', 'Pregunta investigable pero variables no claras', 'Pregunta clara con variables identificadas'],
+                    ['Hipótesis', 'No relaciona variables', 'Relaciona variables sin justificación', 'Relaciona variables con justificación'],
+                    ['Diseño experimental', 'Procedimiento confuso', 'Procedimiento claro pero omite controles', 'Procedimiento claro y seguro']
                 ]
             };
             
-            if (content) {
-                content.innerHTML = rubrics[competency].map(row => `
-                    <div class="rubric-row">
-                        <div class="rubric-cell"><strong>${row[0]}</strong></div>
-                        <div class="rubric-cell">${row[1]}</div>
-                        <div class="rubric-cell">${row[2]}</div>
-                        <div class="rubric-cell">${row[3]}</div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function downloadRubric() {
-            alert('Rúbrica descargada en formato PDF (simulación)');
-            closeModal();
-        }
-
-        function submitQuestion(e) {
-            e.preventDefault();
-            alert('Consulta enviada. El especialista responderá en máximo 48 horas.');
-            closeModal();
+            const data = rubrics[competency] || rubrics.indaga;
+            
+            result.innerHTML = `
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 1rem;">
+                    <tr style="background: var(--primary); color: white;">
+                        <th style="padding: 0.75rem; border: 1px solid var(--border); text-align: left;">Criterio</th>
+                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Inicial</th>
+                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Proceso</th>
+                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Satisfactorio</th>
+                    </tr>
+                    ${data.map(row => `
+                        <tr>
+                            <td style="padding: 0.75rem; border: 1px solid var(--border); font-weight: 600;">${row[0]}</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[1]}</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[2]}</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[3]}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+                <button class="btn btn-primary" style="margin-top: 1rem;" onclick="window.print()">
+                    <i class="fas fa-print"></i> Imprimir rúbrica
+                </button>
+            `;
         }
 
         function openSequence(id) {
@@ -1456,71 +709,51 @@
             openModal('sequence-detail');
             document.getElementById('modalTitle').textContent = seq.title;
             document.getElementById('modalBody').innerHTML = `
-                <div style="margin-bottom: 1.5rem;">
+                <div style="margin-bottom: 1rem;">
                     <span class="card-tag tag-${seq.tags[0]}">${seq.area}</span>
                     <span style="margin-left: 0.5rem; color: var(--text-light);">${seq.grade} • ${seq.duration}</span>
                 </div>
-                
-                <h4>Descripción</h4>
                 <p>${seq.description}</p>
-                
-                <h4 style="margin-top: 1.5rem;">Propósito de aprendizaje</h4>
-                <p>Los estudiantes serán capaces de ${seq.area.toLowerCase()} aplicando el método científico en contextos reales de su comunidad.</p>
-                
-                <h4 style="margin-top: 1.5rem;">Evidencias de aprendizaje</h4>
-                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Evidencias de aprendizaje:</h4>
+                <ul style="margin-left: 1.5rem;">
                     <li>Registro de campo con datos cuantitativos</li>
-                    <li>Informe con hipótesis validada o rechazada</li>
+                    <li>Informe con hipótesis validada</li>
                     <li>Propuesta de mejora basada en evidencias</li>
                 </ul>
-                
-                <h4 style="margin-top: 1.5rem;">¿Por qué es pedagógicamente válida?</h4>
-                <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
-                    <p style="margin: 0; font-size: 0.95rem;">Esta secuencia parte del entorno inmediato del estudiante (quebrada local), genera cognición disonante al confrontar predicciones con datos reales, y culmina en una propuesta de acción concreta, cumpliendo con los ciclos de indagación completa.</p>
-                </div>
-                
-                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                    <button class="btn btn-primary" onclick="alert('Descargando sesión en PDF...')">
-                        <i class="fas fa-download"></i> Descargar sesión completa
-                    </button>
-                    <button class="btn btn-secondary" onclick="alert('Guardado en favoritos')">
-                        <i class="fas fa-bookmark"></i> Guardar
-                    </button>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                    <strong>¿Por qué es pedagógicamente válida?</strong><br>
+                    Parte del entorno inmediato del estudiante, genera cognición disonante y culmina en propuesta de acción concreta.
                 </div>
             `;
-        }
-
-        function loadMoreSequences() {
-            alert('Cargando más secuencias validadas...');
         }
 
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        function checkOffline() {
-            if (!navigator.onLine) {
-                document.getElementById('offlineBanner').classList.add('active');
-            }
-            window.addEventListener('online', () => {
-                document.getElementById('offlineBanner').classList.remove('active');
-            });
-            window.addEventListener('offline', () => {
-                document.getElementById('offlineBanner').classList.add('active');
-            });
-        }
-
         function toggleMobileMenu() {
-            // Simple toggle for mobile menu if needed
-            alert('Menú móvil - use la navegación inferior');
+            alert('Usa la navegación inferior en móvil');
         }
 
-        // Close modal on outside click
+        // ==================== INICIALIZACIÓN ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSequences();
+            renderInquirySteps();
+            renderTech();
+            loadQuestions();
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+
         window.onclick = function(event) {
             const modal = document.getElementById('modal');
-            if (event.target === modal) {
-                closeModal();
-            }
+            if (event.target === modal) closeModal();
         }
     </script>
 </body>
