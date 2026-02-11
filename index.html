@@ -18,6 +18,7 @@
             --secondary: #059669;
             --accent: #f59e0b;
             --danger: #dc2626;
+            --purple: #7c3aed;
             --bg: #f8fafc;
             --card: #ffffff;
             --text: #1e293b;
@@ -78,6 +79,10 @@
             background: transparent; border: 2px solid var(--primary); color: var(--primary);
         }
         .btn-outline:hover { background: var(--primary); color: white; }
+        .btn-purple { background: var(--purple); color: white; }
+        .btn-purple:hover { background: #6d28d9; }
+        .btn-green { background: var(--secondary); color: white; }
+        .btn-green:hover { background: #047857; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
@@ -101,7 +106,7 @@
         .section-header h2 { font-size: 2rem; color: var(--text); margin-bottom: 0.5rem; }
         .section-header p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
-        /* SECCION SECUENCIAS MEJORADA */
+        /* SECUENCIAS */
         .sequences-toolbar {
             background: var(--card); padding: 1.5rem; border-radius: 0.75rem;
             box-shadow: var(--shadow); margin-bottom: 1.5rem;
@@ -123,35 +128,25 @@
             position: absolute; left: 0.875rem; top: 50%;
             transform: translateY(-50%); color: var(--text-light);
         }
-        .filter-group {
-            display: flex; gap: 0.5rem; flex-wrap: wrap;
-        }
+        .filter-group { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .filter-btn {
             padding: 0.625rem 1rem; border: 1px solid var(--border);
             background: white; border-radius: 0.5rem; cursor: pointer;
             font-size: 0.875rem; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;
         }
         .filter-btn:hover { border-color: var(--primary); }
-        .filter-btn.active {
-            background: var(--primary); color: white; border-color: var(--primary);
-        }
-        .results-count {
-            font-size: 0.875rem; color: var(--text-light); margin-bottom: 1rem;
-        }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .results-count { font-size: 0.875rem; color: var(--text-light); margin-bottom: 1rem; }
 
         .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;
         }
         .card {
             background: var(--card); border-radius: 1rem; overflow: hidden;
             box-shadow: var(--shadow); border: 1px solid var(--border);
             transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column;
         }
-        .card:hover {
-            box-shadow: var(--shadow-xl); transform: translateY(-4px);
-        }
+        .card:hover { box-shadow: var(--shadow-xl); transform: translateY(-4px); }
         .card-image {
             height: 160px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             display: flex; align-items: center; justify-content: center; position: relative;
@@ -163,14 +158,11 @@
             border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
             display: flex; align-items: center; gap: 0.25rem;
         }
-        .card-header {
-            padding: 1.25rem; border-bottom: 1px solid var(--border);
-        }
+        .card-header { padding: 1.25rem; border-bottom: 1px solid var(--border); }
         .card-tag {
             display: inline-flex; align-items: center; gap: 0.25rem;
             padding: 0.375rem 0.875rem; border-radius: 9999px;
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem;
         }
         .tag-indagacion { background: #dbeafe; color: #1e40af; }
         .tag-evaluacion { background: #dcfce7; color: #166534; }
@@ -180,20 +172,17 @@
         
         .card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); line-height: 1.4; }
         .card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
-        
         .card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
         .card-meta {
             display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-light);
             margin-bottom: 1rem; flex-wrap: wrap;
         }
         .card-meta span { display: flex; align-items: center; gap: 0.25rem; }
-        
         .card-footer {
             padding: 1rem 1.25rem; border-top: 1px solid var(--border);
             display: flex; gap: 0.5rem;
         }
         .card-footer .btn { flex: 1; justify-content: center; font-size: 0.875rem; padding: 0.625rem; }
-        
         .card-features {
             display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
         }
@@ -202,6 +191,122 @@
             border-radius: 0.375rem; font-size: 0.75rem;
             color: var(--text-light); display: flex; align-items: center; gap: 0.25rem;
         }
+
+        /* GUÍAS MEJORADAS */
+        .guides-tabs {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 1rem 2rem; border: 2px solid var(--border); background: white;
+            border-radius: 0.75rem; cursor: pointer; font-weight: 600;
+            transition: all 0.3s; display: flex; align-items: center; gap: 0.75rem;
+            font-size: 1rem;
+        }
+        .tab-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .tab-btn.active {
+            background: var(--primary); color: white; border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+        .tab-btn.active .tab-icon { background: rgba(255,255,255,0.2); }
+        .tab-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg); font-size: 1.25rem;
+        }
+        
+        .guide-content { display: none; }
+        .guide-content.active { display: block; }
+        
+        .guide-intro {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 2rem; border-radius: 1rem; margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+        .guide-intro.diseno {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border-left-color: var(--purple);
+        }
+        
+        .steps-container {
+            display: grid; gap: 1.5rem;
+        }
+        .step-card {
+            background: var(--card); border-radius: 1rem; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .step-card:hover { box-shadow: var(--shadow-lg); }
+        .step-header {
+            padding: 1.25rem; background: var(--bg);
+            display: flex; align-items: center; gap: 1rem; cursor: pointer;
+        }
+        .step-number {
+            width: 48px; height: 48px; background: var(--primary); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.25rem; flex-shrink: 0;
+        }
+        .step-card.diseno .step-number { background: var(--purple); }
+        .step-title { flex: 1; }
+        .step-title h3 { font-size: 1.125rem; margin-bottom: 0.25rem; }
+        .step-title p { font-size: 0.875rem; color: var(--text-light); margin: 0; }
+        .step-toggle { color: var(--text-light); transition: transform 0.3s; }
+        .step-card.expanded .step-toggle { transform: rotate(180deg); }
+        
+        .step-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+        }
+        .step-card.expanded .step-content { max-height: 2000px; }
+        .step-body { padding: 0 1.25rem 1.25rem; }
+        
+        .step-section { margin-bottom: 1.5rem; }
+        .step-section h4 {
+            font-size: 0.875rem; text-transform: uppercase; color: var(--text-light);
+            margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        
+        .example-box {
+            background: #fefce8; border: 1px solid #fde047; border-radius: 0.75rem;
+            padding: 1rem; margin-bottom: 1rem;
+        }
+        .example-box.good { background: #f0fdf4; border-color: #86efac; }
+        .example-box.bad { background: #fef2f2; border-color: #fca5a5; }
+        .example-box strong {
+            display: block; margin-bottom: 0.5rem; font-size: 0.875rem;
+        }
+        .example-box.good strong { color: var(--secondary); }
+        .example-box.bad strong { color: var(--danger); }
+        
+        .tools-box {
+            background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.75rem;
+            padding: 1rem;
+        }
+        .tools-box h4 { color: var(--primary); margin-bottom: 0.75rem; }
+        .tools-box ul { margin-left: 1.25rem; }
+        .tools-box li { margin-bottom: 0.5rem; }
+        
+        .checklist {
+            list-style: none; margin: 0;
+        }
+        .checklist li {
+            display: flex; align-items: start; gap: 0.75rem;
+            padding: 0.75rem; background: var(--bg); border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .checklist li i { color: var(--secondary); margin-top: 0.125rem; }
+        
+        .template-download {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1.25rem; background: var(--bg); border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+        .template-icon {
+            width: 56px; height: 56px; background: white;
+            border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--primary); box-shadow: var(--shadow);
+        }
+        .template-info { flex: 1; }
+        .template-info h4 { margin-bottom: 0.25rem; }
+        .template-info p { font-size: 0.875rem; color: var(--text-light); margin: 0; }
 
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .tool-card {
@@ -247,8 +352,7 @@
         .modal.active { display: flex; }
         .modal-content {
             background: white; border-radius: 1rem; max-width: 800px; width: 100%;
-            max-height: 90vh; overflow-y: auto; position: relative;
-            margin: auto;
+            max-height: 90vh; overflow-y: auto; position: relative; margin: auto;
         }
         .modal-header {
             padding: 1.5rem; border-bottom: 1px solid var(--border);
@@ -261,24 +365,6 @@
             display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;
         }
         .close-btn:hover { background: var(--border); color: var(--text); }
-
-        .inquiry-steps { display: flex; flex-direction: column; gap: 1.5rem; }
-        .step {
-            display: flex; gap: 1rem; padding: 1.5rem; background: var(--bg);
-            border-radius: 0.75rem; border-left: 4px solid var(--primary);
-        }
-        .step-number {
-            width: 40px; height: 40px; background: var(--primary); color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; flex-shrink: 0;
-        }
-        .step-content h3 { margin-bottom: 0.5rem; color: var(--primary); }
-        .step-content p { color: var(--text-light); font-size: 0.95rem; }
-        .example-box {
-            margin-top: 1rem; padding: 1rem; background: white;
-            border-radius: 0.5rem; border: 1px solid var(--border);
-        }
-        .example-box strong { color: var(--secondary); font-size: 0.875rem; text-transform: uppercase; }
 
         .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -305,6 +391,8 @@
             .sequences-toolbar { flex-direction: column; align-items: stretch; }
             .search-box { min-width: 100%; }
             .cards-grid { grid-template-columns: 1fr; }
+            .guides-tabs { flex-direction: column; }
+            .tab-btn { width: 100%; justify-content: center; }
         }
 
         .text-center { text-align: center; }
@@ -326,9 +414,7 @@
         .meta-item .label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; }
         .meta-item .value { font-weight: 600; color: var(--text); }
         
-        .resources-list {
-            display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;
-        }
+        .resources-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
         .resource-item {
             display: flex; align-items: center; gap: 1rem; padding: 1rem;
             background: var(--bg); border-radius: 0.5rem; border: 1px solid var(--border);
@@ -347,8 +433,8 @@
                 <span>CyT Huaylas</span>
             </div>
             <nav class="nav-desktop">
-                <a href="#secuencias" class="active"><i class="fas fa-book-open"></i> Secuencias</a>
-                <a href="#indagacion"><i class="fas fa-microscope"></i> Indagación</a>
+                <a href="#secuencias"><i class="fas fa-book-open"></i> Secuencias</a>
+                <a href="#guias" class="active"><i class="fas fa-compass"></i> Guías</a>
                 <a href="#evaluacion"><i class="fas fa-clipboard-check"></i> Evaluación</a>
                 <a href="#tecnologia"><i class="fas fa-laptop"></i> Tecnología</a>
                 <a href="#comunidad"><i class="fas fa-users"></i> Comunidad</a>
@@ -369,10 +455,10 @@
             <p>Recursos prácticos, secuencias validadas y acompañamiento pedagógico real para docentes de Ciencia y Tecnología.</p>
             <div class="hero-actions">
                 <a href="#secuencias" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Ver Secuencias Listas
+                    <i class="fas fa-rocket"></i> Ver Secuencias
                 </a>
-                <a href="#indagacion" class="btn btn-secondary">
-                    <i class="fas fa-compass"></i> Guía de Indagación
+                <a href="#guias" class="btn btn-secondary">
+                    <i class="fas fa-compass"></i> Ver Guías
                 </a>
             </div>
         </div>
@@ -389,7 +475,7 @@
             <h3>No sé cómo evaluar</h3>
             <p>Rúbricas y ejemplos de evidencias</p>
         </div>
-        <div class="quick-card" onclick="scrollToSection('indagacion')">
+        <div class="quick-card" onclick="scrollToSection('guias')">
             <i class="fas fa-flask"></i>
             <h3>Diseñar indagación</h3>
             <p>Paso a paso con ejemplos reales</p>
@@ -402,14 +488,13 @@
     </div>
 
     <div class="container">
-        <!-- SECUENCIAS MEJORADAS -->
+        <!-- SECUENCIAS -->
         <section id="secuencias" class="section">
             <div class="section-header">
                 <h2>Banco de Secuencias Didácticas</h2>
-                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad. Filtra por grado, área o busca por palabra clave.</p>
+                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad.</p>
             </div>
             
-            <!-- Toolbar con búsqueda y filtros -->
             <div class="sequences-toolbar">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
@@ -419,49 +504,94 @@
                     <button class="filter-btn active" onclick="filterByGrade('all')" id="filter-grade-all">
                         <i class="fas fa-layer-group"></i> Todos
                     </button>
-                    <button class="filter-btn" onclick="filterByGrade('1°')" id="filter-grade-1">
-                        1° Sec
-                    </button>
-                    <button class="filter-btn" onclick="filterByGrade('2°')" id="filter-grade-2">
-                        2° Sec
-                    </button>
-                    <button class="filter-btn" onclick="filterByGrade('3°')" id="filter-grade-3">
-                        3° Sec
-                    </button>
-                    <button class="filter-btn" onclick="filterByGrade('4°')" id="filter-grade-4">
-                        4° Sec
-                    </button>
-                    <button class="filter-btn" onclick="filterByGrade('5°')" id="filter-grade-5">
-                        5° Sec
-                    </button>
-                </div>
-                <div class="filter-group">
-                    <button class="filter-btn active" onclick="filterByArea('all')" id="filter-area-all">
-                        <i class="fas fa-tags"></i> Todas
-                    </button>
-                    <button class="filter-btn" onclick="filterByArea('Indagación')" id="filter-area-indagacion">
-                        Indagación
-                    </button>
-                    <button class="filter-btn" onclick="filterByArea('Diseño')" id="filter-area-diseno">
-                        Diseño
-                    </button>
-                    <button class="filter-btn" onclick="filterByArea('Evaluación')" id="filter-area-evaluacion">
-                        Evaluación
-                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('1°')" id="filter-grade-1">1° Sec</button>
+                    <button class="filter-btn" onclick="filterByGrade('2°')" id="filter-grade-2">2° Sec</button>
+                    <button class="filter-btn" onclick="filterByGrade('3°')" id="filter-grade-3">3° Sec</button>
+                    <button class="filter-btn" onclick="filterByGrade('4°')" id="filter-grade-4">4° Sec</button>
+                    <button class="filter-btn" onclick="filterByGrade('5°')" id="filter-grade-5">5° Sec</button>
                 </div>
             </div>
             
             <div class="results-count" id="resultsCount">Cargando secuencias...</div>
-            
             <div class="cards-grid" id="sequencesGrid"></div>
         </section>
 
-        <section id="indagacion" class="section">
+        <!-- GUÍAS MEJORADAS -->
+        <section id="guias" class="section">
             <div class="section-header">
-                <h2>Guía Práctica de Indagación Científica</h2>
-                <p>Del problema a la conclusión: estructura clara con ejemplos reales.</p>
+                <h2>Guías Prácticas</h2>
+                <p>Metodologías paso a paso para implementar en tu aula. Selecciona la guía que necesitas.</p>
             </div>
-            <div class="inquiry-steps" id="inquirySteps"></div>
+            
+            <!-- Tabs de selección -->
+            <div class="guides-tabs">
+                <button class="tab-btn active" onclick="switchGuide('indagacion')">
+                    <div class="tab-icon"><i class="fas fa-microscope"></i></div>
+                    <div>
+                        <div>Indagación Científica</div>
+                        <small style="font-weight: normal; opacity: 0.8;">6 pasos</small>
+                    </div>
+                </button>
+                <button class="tab-btn" onclick="switchGuide('diseno')">
+                    <div class="tab-icon"><i class="fas fa-cogs"></i></div>
+                    <div>
+                        <div>Diseño Tecnológico</div>
+                        <small style="font-weight: normal; opacity: 0.8;">5 etapas</small>
+                    </div>
+                </button>
+            </div>
+            
+            <!-- GUÍA DE INDAGACIÓN CIENTÍFICA -->
+            <div id="guide-indagacion" class="guide-content active">
+                <div class="guide-intro">
+                    <h3 style="margin-bottom: 0.75rem; color: var(--primary);"><i class="fas fa-microscope"></i> Guía de Indagación Científica</h3>
+                    <p style="margin-bottom: 1rem;">Metodología para desarrollar investigaciones en el aula, desde la pregunta hasta la conclusión. Ideal para desarrollar la competencia "Indaga mediante métodos científicos".</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span class="feature-tag"><i class="fas fa-clock"></i> Duración: Variable según proyecto</span>
+                        <span class="feature-tag"><i class="fas fa-users"></i> Trabajo: Individual o grupal</span>
+                        <span class="feature-tag"><i class="fas fa-tools"></i> Materiales: Accesibles y locales</span>
+                    </div>
+                </div>
+                
+                <div class="steps-container" id="indagacionSteps"></div>
+                
+                <div class="template-download">
+                    <div class="template-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="template-info">
+                        <h4>Plantilla de Indagación Científica</h4>
+                        <p>Formato editable con todos los pasos para completar con tus estudiantes</p>
+                    </div>
+                    <button class="btn btn-green" onclick="downloadTemplate('indagacion')">
+                        <i class="fas fa-download"></i> Descargar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- GUÍA DE DISEÑO TECNOLÓGICO -->
+            <div id="guide-diseno" class="guide-content">
+                <div class="guide-intro diseno">
+                    <h3 style="margin-bottom: 0.75rem; color: var(--purple);"><i class="fas fa-cogs"></i> Guía de Diseño Tecnológico</h3>
+                    <p style="margin-bottom: 1rem;">Metodología para desarrollar soluciones tecnológicas sostenibles. Ideal para la competencia "Diseña y construye soluciones tecnológicas". Incluye identificación de necesidades, prototipado y evaluación.</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span class="feature-tag"><i class="fas fa-clock"></i> Duración: 4-6 sesiones</span>
+                        <span class="feature-tag"><i class="fas fa-users"></i> Trabajo: Grupal preferente</span>
+                        <span class="feature-tag"><i class="fas fa-recycle"></i> Enfoque: Sostenibilidad</span>
+                    </div>
+                </div>
+                
+                <div class="steps-container" id="disenoSteps"></div>
+                
+                <div class="template-download">
+                    <div class="template-icon" style="color: var(--purple);"><i class="fas fa-drafting-compass"></i></div>
+                    <div class="template-info">
+                        <h4>Plantilla de Diseño Tecnológico</h4>
+                        <p>Formato editable con ficha de diseño, registro de pruebas y matriz de evaluación</p>
+                    </div>
+                    <button class="btn btn-purple" onclick="downloadTemplate('diseno')">
+                        <i class="fas fa-download"></i> Descargar
+                    </button>
+                </div>
+            </div>
         </section>
 
         <section id="evaluacion" class="section">
@@ -523,8 +653,8 @@
     </div>
 
     <nav class="mobile-nav">
-        <a href="#secuencias" class="active"><i class="fas fa-book-open"></i><span>Secuencias</span></a>
-        <a href="#indagacion"><i class="fas fa-microscope"></i><span>Indagación</span></a>
+        <a href="#secuencias"><i class="fas fa-book-open"></i><span>Secuencias</span></a>
+        <a href="#guias" class="active"><i class="fas fa-compass"></i><span>Guías</span></a>
         <a href="#evaluacion"><i class="fas fa-clipboard-check"></i><span>Evaluar</span></a>
         <a href="#comunidad"><i class="fas fa-users"></i><span>Ayuda</span></a>
     </nav>
@@ -553,246 +683,595 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // ==================== DATOS DE SECUENCIAS AMPLIADAS ====================
+        // ==================== DATOS DE SECUENCIAS ====================
         const sequences = [
             {
-                id: 1, 
-                title: "¿Por qué se erosiona nuestra quebrada?",
-                grade: "1° Secundaria",
-                area: "Indagación científica",
-                duration: "4 sesiones",
-                context: "Rural/Urbano",
-                description: "Secuencia completa de indagación sobre erosión del suelo usando el entorno local. Incluye salida de campo, toma de muestras y propuesta de soluciones.",
-                tags: ["indagacion"],
-                validated: true,
-                competencias: ["Indaga", "Explica"],
-                recursos: ["Guía de campo", "Ficha de observación", "Rúbrica de evaluación"],
-                sesiones: [
-                    "Identificación del problema en la quebrada local",
-                    "Toma de muestras y observación de factores",
-                    "Análisis de datos y conclusiones",
-                    "Propuesta de soluciones y socialización"
-                ]
+                id: 1, title: "¿Por qué se erosiona nuestra quebrada?", grade: "1° Secundaria",
+                area: "Indagación científica", duration: "4 sesiones", context: "Rural/Urbano",
+                description: "Secuencia completa de indagación sobre erosión del suelo usando el entorno local.",
+                tags: ["indagacion"], validated: true, competencias: ["Indaga", "Explica"]
             },
             {
-                id: 2, 
-                title: "Diseño de un irrigador para la huerta escolar",
-                grade: "2° Secundaria",
-                area: "Diseño tecnológico",
-                duration: "6 sesiones",
-                context: "Rural",
-                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales (botellas, mangueras recicladas) y evalúan eficacia.",
-                tags: ["diseno"],
-                validated: true,
-                competencias: ["Diseña", "Evalúa"],
-                recursos: ["Plantilla de diseño", "Lista de materiales", "Matriz de evaluación"],
-                sesiones: [
-                    "Diagnóstico de necesidades de riego",
-                    "Investigación de soluciones existentes",
-                    "Bocetos y selección de propuesta",
-                    "Construcción del prototipo",
-                    "Prueba y registro de datos",
-                    "Mejora y presentación"
-                ]
+                id: 2, title: "Diseño de un irrigador para la huerta escolar", grade: "2° Secundaria",
+                area: "Diseño tecnológico", duration: "6 sesiones", context: "Rural",
+                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales.",
+                tags: ["diseno"], validated: true, competencias: ["Diseña", "Evalúa"]
             },
             {
-                id: 3, 
-                title: "¿El agua de mi comunidad es potable?",
-                grade: "3° Secundaria",
-                area: "Indagación científica",
-                duration: "5 sesiones",
-                context: "Rural/Urbano",
-                description: "Análisis físico-químico básico del agua usando reactivos caseros. Conexión con derecho al agua y propuestas de tratamiento.",
-                tags: ["indagacion"],
-                validated: true,
-                competencias: ["Indaga", "Comunica"],
-                recursos: ["Protocolo de análisis", "Tabla de resultados", "Infografía modelo"],
-                sesiones: [
-                    "Planteamiento del problema y hipótesis",
-                    "Diseño del muestreo",
-                    "Pruebas físico-químicas",
-                    "Análisis de resultados vs normas",
-                    "Propuesta de mejora y socialización"
-                ]
-            },
-            {
-                id: 4, 
-                title: "Simulando ecosistemas: El equilibrio natural",
-                grade: "1° Secundaria",
-                area: "Explicación científica",
-                duration: "3 sesiones",
-                context: "Urbano",
-                description: "Uso de simulador PhET para entender cadenas alimentarias antes de salida de campo. Incluye versión offline.",
-                tags: ["tecnologia"],
-                validated: true,
-                competencias: ["Explica", "Modela"],
-                recursos: ["Guía PhET offline", "Ficha de registro", "Video explicativo"],
-                sesiones: [
-                    "Exploración del simulador y predicciones",
-                    "Manipulación de variables y registro",
-                    "Conexión con ecosistema local real"
-                ]
-            },
-            {
-                id: 5, 
-                title: "Construyendo un termómetro casero",
-                grade: "2° Secundaria",
-                area: "Indagación científica",
-                duration: "2 sesiones",
-                context: "Rural",
-                description: "Diseño y calibración de termómetros con materiales de bajo costo. Comparación con termómetro estándar y análisis de error.",
-                tags: ["indagacion"],
-                validated: true,
-                competencias: ["Indaga", "Mide"],
-                recursos: ["Instrucciones de construcción", "Tabla de calibración", "Análisis de error"],
-                sesiones: [
-                    "Construcción y primeras mediciones",
-                    "Calibración y validación del instrumento"
-                ]
-            },
-            {
-                id: 6, 
-                title: "Evaluando mi huella ecológica",
-                grade: "3° Secundaria",
-                area: "Competencias ciudadanas",
-                duration: "3 sesiones",
-                context: "Urbano",
-                description: "Cálculo de huella ecológica personal y grupal. Propuesta de acciones de mitigación concretas para la escuela.",
-                tags: ["evaluacion"],
-                validated: true,
-                competencias: ["Evalúa", "Participa"],
-                recursos: ["Calculadora de huella", "Plan de acción", "Rúbrica de compromiso"],
-                sesiones: [
-                    "Cálculo individual y reflexión",
-                    "Análisis grupal y comparación",
-                    "Propuesta y compromiso de acciones"
-                ]
-            },
-            {
-                id: 7, 
-                title: "Diseño de un sistema de compostaje escolar",
-                grade: "4° Secundaria",
-                area: "Diseño tecnológico",
-                duration: "5 sesiones",
-                context: "Rural/Urbano",
-                description: "Diseño de compostera adaptada al espacio y necesidades de la escuela. Incluye manual de uso y mantenimiento.",
-                tags: ["diseno"],
-                validated: true,
-                competencias: ["Diseña", "Gestiona"],
-                recursos: ["Manual de compostaje", "Planos modelo", "Cronograma de mantenimiento"],
-                sesiones: [
-                    "Auditoría de residuos orgánicos",
-                    "Investigación de tecnologías de compostaje",
-                    "Diseño adaptado al contexto escolar",
-                    "Construcción y prueba piloto",
-                    "Manual de operación y difusión"
-                ]
-            },
-            {
-                id: 8, 
-                title: "¿Por qué varía la temperatura en mi localidad?",
-                grade: "5° Secundaria",
-                area: "Indagación científica",
-                duration: "4 sesiones",
-                context: "Rural/Urbano",
-                description: "Estudio de variables climáticas locales usando datos históricos y mediciones propias. Conexión con cambio climático global.",
-                tags: ["indagacion"],
-                validated: true,
-                competencias: ["Indaga", "Analiza datos"],
-                recursos: ["Base de datos climáticos", "Plantilla de análisis", "Guía de graficación"],
-                sesiones: [
-                    "Planteamiento y búsqueda de datos históricos",
-                    "Diseño del sistema de monitoreo",
-                    "Recolección y organización de datos",
-                    "Análisis y tendencias locales vs global"
-                ]
+                id: 3, title: "¿El agua de mi comunidad es potable?", grade: "3° Secundaria",
+                area: "Indagación científica", duration: "5 sesiones", context: "Rural/Urbano",
+                description: "Análisis físico-químico básico del agua usando reactivos caseros.",
+                tags: ["indagacion"], validated: true, competencias: ["Indaga", "Comunica"]
             }
         ];
 
-        // ==================== VARIABLES DE FILTRO ====================
+        // ==================== PASOS DE INDAGACIÓN ====================
+        const indagacionSteps = [
+            {
+                num: 1, title: "Planteamiento del Problema", subtitle: "La pregunta investigable",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-question-circle"></i> ¿Qué hacer?</h4>
+                        <p>Formular una pregunta clara, concreta y que se pueda responder mediante evidencia. Debe conectar con el contexto del estudiante.</p>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-lightbulb"></i> Características de una buena pregunta</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div>Sea específica (no muy amplia)</div></li>
+                            <li><i class="fas fa-check"></i> <div>Relacione variables medibles</div></li>
+                            <li><i class="fas fa-check"></i> <div>Sea relevante para el contexto local</div></li>
+                            <li><i class="fas fa-check"></i> <div>Pueda responderse con evidencia (no opinión)</div></li>
+                        </ul>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-check-circle"></i> EJEMPLO VÁLIDO</strong>
+                        "¿Cómo afecta la salinidad del agua del río a la flotación de objetos?"
+                    </div>
+                    <div class="example-box bad">
+                        <strong><i class="fas fa-times-circle"></i> ERROR COMÚN</strong>
+                        "Investigar sobre el agua" (muy amplia) o "¿El agua es importante?" (no investigable)
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> Herramientas útiles</h4>
+                        <ul>
+                            <li>Mapa de contexto: ¿Qué problemas observan los estudiantes?</li>
+                            <li>Lluvia de ideas: Todas las preguntas son válidas inicialmente</li>
+                            <li>Filtro de preguntas: ¿Es investigable? ¿Tenemos acceso?</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 2, title: "Identificación de Variables", subtitle: "Lo que cambia y lo que mide",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-exchange-alt"></i> Tipos de variables</h4>
+                        <div style="display: grid; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="padding: 1rem; background: #dbeafe; border-radius: 0.5rem; border-left: 4px solid #2563eb;">
+                                <strong style="color: #1e40af;">Variable Independiente</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Lo que el estudiante decide cambiar (la causa)</p>
+                            </div>
+                            <div style="padding: 1rem; background: #dcfce7; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
+                                <strong style="color: #166534;">Variable Dependiente</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Lo que se mide u observa (el efecto)</p>
+                            </div>
+                            <div style="padding: 1rem; background: #f3f4f6; border-radius: 0.5rem; border-left: 4px solid #6b7280;">
+                                <strong style="color: #374151;">Variables Controladas</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Lo que se mantiene constante para que sea justo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-flask"></i> EJEMPLO PRÁCTICO</strong>
+                        <strong>Experimento:</strong> "¿Cómo afecta la temperatura a la velocidad de disolución del azúcar?"<br><br>
+                        <strong>Independiente:</strong> Temperatura del agua (fría, tibia, caliente)<br>
+                        <strong>Dependiente:</strong> Tiempo que tarda en disolverse (en segundos)<br>
+                        <strong>Controladas:</strong> Cantidad de agua (200ml), tipo de azúcar (blanca), cantidad de azúcar (5g), no agitar
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Errores comunes a evitar</h4>
+                        <ul>
+                            <li>Confundir la variable dependiente con el resultado deseado</li>
+                            <li>Olvidar controlar variables que sí afectan el resultado</li>
+                            <li>Elegir variables que no se pueden medir en el aula</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 3, title: "Hipótesis Argumentada", subtitle: "Predicción con fundamento",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-brain"></i> ¿Qué es una hipótesis?</h4>
+                        <p>Respuesta tentativa a la pregunta de investigación, basada en conocimiento previo. Debe establecer una relación clara entre variables.</p>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-pencil-alt"></i> Estructura recomendada</h4>
+                        <div style="padding: 1rem; background: #eff6ff; border-radius: 0.5rem; font-family: monospace; margin-bottom: 1rem;">
+                            "Si [cambio en variable independiente], entonces [efecto en variable dependiente] porque [justificación científica]"
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-check-circle"></i> HIPÓTESIS FUERTE</strong>
+                        "Si aumenta la temperatura del agua, entonces el azúcar se disolverá más rápido porque las partículas se mueven con mayor energía cinética y chocan más frecuentemente."
+                    </div>
+                    <div class="example-box bad">
+                        <strong><i class="fas fa-times-circle"></i> HIPÓTESIS DÉBIL</strong>
+                        "Creo que el azúcar se disuelve en agua caliente." (No relaciona variables, no tiene justificación)
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-graduation-cap"></i> Para nivel secundaria</h4>
+                        <ul>
+                            <li>Acepta hipótesis que no se cumplan (aprendizaje válido)</li>
+                            <li>La justificación puede basarse en observaciones previas, no solo teoría</li>
+                            <li>Fomenta que usen "si... entonces..." para estructurar el pensamiento</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 4, title: "Diseño Experimental", subtitle: "El plan para probar",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-clipboard-list"></i> Elementos del diseño</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div><strong>Materiales:</strong> Lista detallada y accesibles</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Procedimiento:</strong> Pasos numerados y claros</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Repeticiones:</strong> Mínimo 3 veces para confiabilidad</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Seguridad:</strong> Identificar riesgos y precauciones</div></li>
+                        </ul>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-list-ol"></i> EJEMPLO DE PROCEDIMIENTO</strong>
+                        <ol style="margin: 0.5rem 0 0 1.25rem;">
+                            <li>Medir 200ml de agua y calentar a 30°C (agua fría)</li>
+                            <li>Agregar 5g de azúcar y cronometrar tiempo de disolución completa</li>
+                            <li>Repetir con agua a 50°C (tibia) y 70°C (caliente)</li>
+                            <li>Registrar datos en tabla</li>
+                            <li>Repetir todo el proceso 3 veces (3 repeticiones)</li>
+                        </ol>
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-lightbulb"></i> Consejos prácticos</h4>
+                        <ul>
+                            <li>Usa materiales del entorno (agua de río, tierra local, plantas nativas)</li>
+                            <li>Si no hay termómetro, usa percepción táctil pero registra consistentemente</li>
+                            <li>Anticipa "¿qué puede salir mal?" y ten plan B</li>
+                            <li>Involucra a los estudiantes en el diseño, no solo en la ejecución</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 5, title: "Recolección de Evidencias", subtitle: "Datos confiables",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-table"></i> Tipos de evidencia</h4>
+                        <div style="display: grid; gap: 1rem; margin-bottom: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                            <div style="padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                                <strong style="color: var(--secondary);"><i class="fas fa-ruler"></i> Cuantitativos</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Números, mediciones, conteos. Ej: tiempo, temperatura, distancia</p>
+                            </div>
+                            <div style="padding: 1rem; background: #fef3c7; border-radius: 0.5rem;">
+                                <strong style="color: #92400e;"><i class="fas fa-eye"></i> Cualitativos</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Descripciones, colores, texturas, observaciones</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-exclamation-circle"></i> Registro efectivo</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div>Incluye unidades en todas las mediciones</div></li>
+                            <li><i class="fas fa-check"></i> <div>Anota observaciones inesperadas (errores, sorpresas)</div></li>
+                            <li><i class="fas fa-check"></i> <div>Usa tablas organizadas desde antes del experimento</div></li>
+                            <li><i class="fas fa-check"></i> <div>Fotografía o dibuja el proceso</div></li>
+                        </ul>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-table"></i> TABLA DE REGISTRO EJEMPLO</strong>
+                        <table style="width: 100%; margin-top: 0.5rem; border-collapse: collapse; font-size: 0.875rem;">
+                            <tr style="background: #e5e7eb;">
+                                <th style="padding: 0.5rem; border: 1px solid #d1d5db;">Ensayo</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d1d5db;">Temperatura</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d1d5db;">Tiempo (s)</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d1d5db;">Observaciones</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #d1d5db;">1</td>
+                                <td style="padding: 0.5rem; border: 1px solid #d1d5db;">Fría</td>
+                                <td style="padding: 0.5rem; border: 1px solid #d1d5db;"></td>
+                                <td style="padding: 0.5rem; border: 1px solid #d1d5db;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                num: 6, title: "Análisis y Conclusión", subtitle: "Sacar sentido a los datos",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-chart-line"></i> Análisis de datos</h4>
+                        <p>Organizar, representar (tablas, gráficos) e interpretar los datos para encontrar patrones.</p>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div>Calcula promedios si hay repeticiones</div></li>
+                            <li><i class="fas fa-check"></i> <div>Identifica valores atípicos y explica por qué</div></li>
+                            <li><i class="fas fa-check"></i> <div>Busca relaciones entre variables</div></li>
+                        </ul>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-flag-checkered"></i> Estructura de la conclusión</h4>
+                        <div style="padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                            <ol style="margin-left: 1.25rem; margin-bottom: 0;">
+                                <li style="margin-bottom: 0.5rem;"><strong>¿Qué descubrimos?</strong> - Responde la pregunta con datos</li>
+                                <li style="margin-bottom: 0.5rem;"><strong>¿Se cumplió la hipótesis?</strong> - Confirma o rechaza con evidencia</li>
+                                <li style="margin-bottom: 0.5rem;"><strong>¿Por qué?</strong> - Explicación científica breve</li>
+                                <li style="margin-bottom: 0.5rem;"><strong>Limitaciones:</strong> - ¿Qué pudo afectar los resultados?</li>
+                                <li><strong>Nuevas preguntas:</strong> - ¿Qué queda por investigar?</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-check-circle"></i> CONCLUSIÓN COMPLETA</strong>
+                        "Los datos muestran que el azúcar se disuelve más rápido en agua caliente (promedio 15s) que en fría (promedio 45s). Esto confirma nuestra hipótesis porque la mayor energía térmica aumenta el movimiento de partículas. Una limitación fue que no controlamos la humedad ambiental. Para mejorar, podríamos hacer más repeticiones y probar con otros tipos de azúcar."
+                    </div>
+                `
+            }
+        ];
+
+        // ==================== PASOS DE DISEÑO TECNOLÓGICO ====================
+        const disenoSteps = [
+            {
+                num: 1, title: "Identificación de la Necesidad", subtitle: "¿Qué problema resolver?",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-search"></i> Diagnóstico del contexto</h4>
+                        <p>Observar el entorno cercano (escuela, hogar, comunidad) para detectar necesidades reales que puedan resolverse con una solución tecnológica.</p>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-clipboard-check"></i> Criterios para identificar necesidades válidas</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div>Afecta a personas reales del contexto</div></li>
+                            <li><i class="fas fa-check"></i> <div>Puede resolverse con recursos locales</div></li>
+                            <li><i class="fas fa-check"></i> <div>Es factible en el tiempo disponible</div></li>
+                            <li><i class="fas fa-check"></i> <div>Genera impacto positivo sostenible</div></li>
+                        </ul>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-check-circle"></i> EJEMPLOS DE NECESIDADES VÁLIDAS</strong>
+                        <ul style="margin: 0.5rem 0 0 1.25rem;">
+                            <li>El riego de la huerta escolar es irregular y depende de quién esté presente</li>
+                            <li>No hay sistema de separación de residuos orgánicos en la escuela</li>
+                            <li>Falta almacenamiento seguro para herramientas de la huerta</li>
+                            <li>El agua de lluvia se desperdicia y podría aprovecharse</li>
+                        </ul>
+                    </div>
+                    <div class="example-box bad">
+                        <strong><i class="fas fa-times-circle"></i> NECESIDADES POCO VIABLES</strong>
+                        "Diseñar un robot que limpie la escuela" (muy complejo, recursos inaccesibles) o "Hacer un avión" (no resuelve necesidad real identificada)
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-tools"></i> Técnicas de diagnóstico</h4>
+                        <ul>
+                            <li><strong>Recorrido guiado:</strong> Caminar por la escuela con los estudiantes anotando problemas</li>
+                            <li><strong>Entrevistas:</strong> Preguntar a directivos, jardineros, cocineros sobre sus necesidades</li>
+                            <li><strong>Mapeo:</strong> Dibujar la escuela y marcar zonas problemáticas</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 2, title: "Investigación de Soluciones", subtitle: "¿Qué ya existe?",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-book-open"></i> Estado del arte</h4>
+                        <p>Buscar cómo otras personas han resuelto problemas similares. No reinventar, sino adaptar y mejorar.</p>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-list-ul"></i> Fuentes de investigación</h4>
+                        <div style="display: grid; gap: 0.75rem; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--bg); border-radius: 0.5rem;">
+                                <i class="fas fa-users" style="color: var(--purple);"></i>
+                                <div><strong>Saberes locales:</strong> Preguntar a adultos de la comunidad cómo solucionaban antes</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--bg); border-radius: 0.5rem;">
+                                <i class="fas fa-video" style="color: var(--purple);"></i>
+                                <div><strong>Videos tutoriales:</strong> Buscar soluciones similares en internet (cuando haya conexión)</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--bg); border-radius: 0.5rem;">
+                                <i class="fas fa-book" style="color: var(--purple);"></i>
+                                <div><strong>Textos escolares:</strong> Revisar libros de CyT de grados anteriores</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-lightbulb"></i> EJEMPLO DE INVESTIGACIÓN</strong>
+                        <strong>Problema:</strong> Riego irregular de la huerta<br><br>
+                        <strong>Soluciones encontradas:</strong><br>
+                        • Sistema de riego por goteo con botellas (bajo costo)<br>
+                        • Sistema de capilaridad con mechas de tela<br>
+                        • Programadores de riego comerciales (caros)<br>
+                        • Riego manual con horario fijo (depende de personas)<br><br>
+                        <strong>Análisis:</strong> El sistema de goteo con botellas es el más adecuado porque usa materiales reciclados disponibles y no requiere electricidad.
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-table"></i> Registro de investigación</h4>
+                        <p>Crear tabla comparativa:</p>
+                        <table style="width: 100%; margin-top: 0.5rem; font-size: 0.875rem; border-collapse: collapse;">
+                            <tr style="background: #f3e8ff;">
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">Solución</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">Ventajas</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">Desventajas</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">Opción A</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;"></td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                num: 3, title: "Propuesta de Diseño", subtitle: "Del boceto al plan",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-pencil-ruler"></i> Elementos del diseño</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div><strong>Bocetos:</strong> Dibujos de diferentes vistas (frente, lado, arriba)</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Lista de materiales:</strong> Detallada con cantidades</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Funcionamiento:</strong> Explicación de cómo opera</div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Criterios de éxito:</strong> ¿Cómo sabremos si funciona?</div></li>
+                        </ul>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-recycle"></i> Criterios de sostenibilidad</h4>
+                        <div style="display: grid; gap: 0.5rem; margin-bottom: 1rem;">
+                            <div style="padding: 0.75rem; background: #f0fdf4; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-leaf" style="color: var(--secondary);"></i>
+                                <span>Usa materiales reciclados o locales</span>
+                            </div>
+                            <div style="padding: 0.75rem; background: #f0fdf4; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-bolt" style="color: var(--secondary);"></i>
+                                <span>No requiere energía eléctrica (preferente)</span>
+                            </div>
+                            <div style="padding: 0.75rem; background: #f0fdf4; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-wrench" style="color: var(--secondary);"></i>
+                                <span>Puede repararse fácilmente</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-drafting-compass"></i> EJEMPLO DE PROPUESTA</strong>
+                        <strong>Diseño:</strong> Sistema de riego por goteo con botellas PET<br><br>
+                        <strong>Materiales:</strong> 10 botellas de 2L, cinta adhesiva, alfileres, tijeras, marcador<br><br>
+                        <strong>Funcionamiento:</strong> Las botellas se llenan de agua y se colocan invertidas junto a las plantas. El agua gotea lentamente manteniendo la humedad.<br><br>
+                        <strong>Criterios de éxito:</strong> 
+                        • Mantiene la tierra húmeda por 3 días sin recarga<br>
+                        • No desperdicia agua (sin fugas)<br>
+                        • Fácil de recargar por los estudiantes
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Errores comunes</h4>
+                        <ul>
+                            <li>Diseños demasiado complejos para el tiempo disponible</li>
+                            <li>No considerar quién mantendrá la solución después</li>
+                            <li>Olvidar medidas de seguridad (bordes filosos, toxicidad)</li>
+                            <li>No probar con materiales similares antes de construir</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                num: 4, title: "Construcción y Prueba", subtitle: "Del plan a la realidad",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-hammer"></i> Construcción</h4>
+                        <p>Seguir el plan pero estar abierto a ajustes. Documentar el proceso con fotos o video.</p>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> <div>Trabajo organizado: roles definidos si es grupal</div></li>
+                            <li><i class="fas fa-check"></i> <div>Uso seguro de herramientas (tijeras, cuchillos, taladros manuales)</div></li>
+                            <li><i class="fas fa-check"></i> <div>Registro de problemas surgidos y soluciones</div></li>
+                        </ul>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-vial"></i> Prueba y registro</h4>
+                        <p>Probar el prototipo bajo condiciones reales y registrar datos objetivos.</p>
+                        <div style="padding: 1rem; background: #faf5ff; border-radius: 0.5rem; margin-bottom: 1rem;">
+                            <strong style="color: var(--purple);">Ejemplo de prueba para riego:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.25rem;">
+                                <li>¿Cuánto tiempo tarda en vaciarse la botella?</li>
+                                <li>¿Alcanza el agua a la planta?</li>
+                                <li>¿Se mantiene estable el sistema?</li>
+                                <li>¿Qué pasa si llueve?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-clipboard"></i> REGISTRO DE PRUEBA</strong>
+                        <table style="width: 100%; margin-top: 0.5rem; font-size: 0.875rem; border-collapse: collapse;">
+                            <tr style="background: #f3e8ff;">
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">Aspecto evaluado</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">Resultado</th>
+                                <th style="padding: 0.5rem; border: 1px solid #d8b4fe;">¿Cumple?</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">Duración del riego</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">2 días</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">No (objetivo: 3 días)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">Estabilidad</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">Se cae con viento</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e9d5ff;">No</td>
+                            </tr>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                num: 5, title: "Evaluación y Mejora", subtitle: "¿Funciona? ¿Cómo mejorarlo?",
+                content: `
+                    <div class="step-section">
+                        <h4><i class="fas fa-chart-bar"></i> Evaluación del diseño</h4>
+                        <p>Comparar los resultados con los criterios de éxito definidos. Ser honestos sobre limitaciones.</p>
+                        <div style="display: grid; gap: 0.75rem; margin-bottom: 1rem;">
+                            <div style="padding: 1rem; background: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                                <strong style="color: var(--secondary);"><i class="fas fa-check-circle"></i> ¿Qué funcionó bien?</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Identificar fortalezas del diseño</p>
+                            </div>
+                            <div style="padding: 1rem; background: #fef2f2; border-radius: 0.5rem; border-left: 4px solid var(--danger);">
+                                <strong style="color: var(--danger);"><i class="fas fa-times-circle"></i> ¿Qué no funcionó?</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Problemas detectados (no son fracasos, son aprendizajes)</p>
+                            </div>
+                            <div style="padding: 1rem; background: #eff6ff; border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                                <strong style="color: var(--primary);"><i class="fas fa-lightbulb"></i> ¿Qué mejorar?</strong>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Propuestas concretas de mejora</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-section">
+                        <h4><i class="fas fa-redo"></i> Iteración</h4>
+                        <p>El diseño tecnológico es cíclico. Las mejoras se implementan y se prueba de nuevo.</p>
+                    </div>
+                    <div class="example-box good">
+                        <strong><i class="fas fa-clipboard-check"></i> EVALUACIÓN COMPLETA</strong>
+                        <strong>Diseño:</strong> Sistema de riego con botellas<br><br>
+                        <strong>Resultados vs. criterios:</strong><br>
+                        • Duración: 2 días (objetivo: 3) → <strong>No cumple</strong><br>
+                        • Estabilidad: Se cae con viento → <strong>No cumple</strong><br>
+                        • Fácil recarga: Sí → <strong>Cumple</strong><br><br>
+                        <strong>Mejoras propuestas:</strong><br>
+                        • Hacer agujeros más pequeños para que dure más<br>
+                        • Enterrar parcialmente la botella para estabilidad<br>
+                        • Probar con botellas de 3L en lugar de 2L
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-users"></i> Socialización</h4>
+                        <p>Comunicar el diseño a otros para que pueda replicarse:</p>
+                        <ul>
+                            <li><strong>Manual de uso:</strong> Cómo operar y mantener la solución</li>
+                            <li><strong>Cartel explicativo:</strong> Para la comunidad escolar</li>
+                            <li><strong>Video demostrativo:</strong> Si hay recursos tecnológicos</li>
+                        </ul>
+                    </div>
+                `
+            }
+        ];
+
+        // ==================== RENDERIZAR GUÍAS ====================
+        function renderIndagacionSteps() {
+            const container = document.getElementById('indagacionSteps');
+            container.innerHTML = indagacionSteps.map((step, index) => `
+                <div class="step-card ${index === 0 ? 'expanded' : ''}" onclick="toggleStep(this)">
+                    <div class="step-header">
+                        <div class="step-number">${step.num}</div>
+                        <div class="step-title">
+                            <h3>${step.title}</h3>
+                            <p>${step.subtitle}</p>
+                        </div>
+                        <i class="fas fa-chevron-down step-toggle"></i>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-body">
+                            ${step.content}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderDisenoSteps() {
+            const container = document.getElementById('disenoSteps');
+            container.innerHTML = disenoSteps.map((step, index) => `
+                <div class="step-card diseno ${index === 0 ? 'expanded' : ''}" onclick="toggleStep(this)">
+                    <div class="step-header">
+                        <div class="step-number">${step.num}</div>
+                        <div class="step-title">
+                            <h3>${step.title}</h3>
+                            <p>${step.subtitle}</p>
+                        </div>
+                        <i class="fas fa-chevron-down step-toggle"></i>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-body">
+                            ${step.content}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleStep(card) {
+            card.classList.toggle('expanded');
+        }
+
+        function switchGuide(guide) {
+            // Actualizar tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Mostrar contenido correspondiente
+            document.querySelectorAll('.guide-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`guide-${guide}`).classList.add('active');
+        }
+
+        function downloadTemplate(type) {
+            const templates = {
+                indagacion: 'Plantilla_Indagacion_Cientifica.docx',
+                diseno: 'Plantilla_Diseno_Tecnologico.docx'
+            };
+            alert(`Descargando: ${templates[type]}\n\nEn una implementación real, esto descargaría el archivo editable.`);
+        }
+
+        // ==================== SECUENCIAS (código existente simplificado) ====================
         let currentGradeFilter = 'all';
-        let currentAreaFilter = 'all';
         let currentSearch = '';
 
-        // ==================== RENDERIZAR SECUENCIAS ====================
         function renderSequences() {
             const grid = document.getElementById('sequencesGrid');
-            
-            // Aplicar filtros
             let filtered = sequences.filter(seq => {
                 const matchGrade = currentGradeFilter === 'all' || seq.grade.includes(currentGradeFilter);
-                const matchArea = currentAreaFilter === 'all' || seq.area.includes(currentAreaFilter);
                 const matchSearch = currentSearch === '' || 
                     seq.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                    seq.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                    seq.tags.some(tag => tag.toLowerCase().includes(currentSearch.toLowerCase()));
-                
-                return matchGrade && matchArea && matchSearch;
+                    seq.description.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchGrade && matchSearch;
             });
             
-            // Actualizar contador
             document.getElementById('resultsCount').textContent = 
-                `Mostrando ${filtered.length} de ${sequences.length} secuencias disponibles`;
+                `Mostrando ${filtered.length} de ${sequences.length} secuencias`;
             
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1/-1;">
-                        <i class="fas fa-search"></i>
-                        <h3>No se encontraron secuencias</h3>
-                        <p>Intenta con otros filtros o términos de búsqueda</p>
-                    </div>
-                `;
+                grid.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><i class="fas fa-search"></i><h3>No se encontraron secuencias</h3></div>`;
                 return;
             }
             
-            grid.innerHTML = filtered.map(seq => {
-                const tagClass = `tag-${seq.tags[0]}`;
-                const iconMap = {
-                    'indagacion': 'fa-microscope',
-                    'diseno': 'fa-cogs',
-                    'tecnologia': 'fa-laptop',
-                    'evaluacion': 'fa-clipboard-check'
-                };
-                const icon = iconMap[seq.tags[0]] || 'fa-book';
-                
-                return `
-                    <div class="card" onclick="openSequenceDetail(${seq.id})">
-                        <div class="card-image">
-                            <i class="fas ${icon}"></i>
-                            <div class="card-badge">
-                                <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
-                                Validada
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <span class="card-tag ${tagClass}">${seq.area}</span>
-                            <h3>${seq.title}</h3>
-                            <p>${seq.description}</p>
-                            <div class="card-features">
-                                ${seq.competencias.map(comp => `
-                                    <span class="feature-tag"><i class="fas fa-bullseye"></i> ${comp}</span>
-                                `).join('')}
-                            </div>
-                            <div class="card-meta">
-                                <span><i class="fas fa-graduation-cap"></i> ${seq.grade}</span>
-                                <span><i class="fas fa-clock"></i> ${seq.duration}</span>
-                                <span><i class="fas fa-map-marker-alt"></i> ${seq.context}</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-outline" onclick="event.stopPropagation(); openSequenceDetail(${seq.id})">
-                                <i class="fas fa-eye"></i> Ver detalle
-                            </button>
-                            <button class="btn btn-primary" onclick="event.stopPropagation(); downloadSequence(${seq.id})">
-                                <i class="fas fa-download"></i> Descargar
-                            </button>
+            grid.innerHTML = filtered.map(seq => `
+                <div class="card" onclick="openSequenceDetail(${seq.id})">
+                    <div class="card-image">
+                        <i class="fas fa-book-open"></i>
+                        <div class="card-badge"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Validada</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-tag tag-${seq.tags[0]}">${seq.area}</span>
+                        <h3>${seq.title}</h3>
+                        <p>${seq.description}</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-graduation-cap"></i> ${seq.grade}</span>
+                            <span><i class="fas fa-clock"></i> ${seq.duration}</span>
                         </div>
                     </div>
-                `;
-            }).join('');
+                    <div class="card-footer">
+                        <button class="btn btn-outline" onclick="event.stopPropagation(); openSequenceDetail(${seq.id})">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); alert('Descargando...')">
+                            <i class="fas fa-download"></i> Descargar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // ==================== FUNCIONES DE FILTRO ====================
         function filterSequences() {
             currentSearch = document.getElementById('searchInput').value;
             renderSequences();
@@ -800,193 +1279,42 @@
 
         function filterByGrade(grade) {
             currentGradeFilter = grade;
-            
-            // Actualizar botones activos
             document.querySelectorAll('[id^="filter-grade-"]').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`filter-grade-${grade === 'all' ? 'all' : grade.replace('°', '')}`).classList.add('active');
-            
             renderSequences();
         }
 
-        function filterByArea(area) {
-            currentAreaFilter = area;
-            
-            // Actualizar botones activos
-            document.querySelectorAll('[id^="filter-area-"]').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`filter-area-${area === 'all' ? 'all' : area.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`).classList.add('active');
-            
-            renderSequences();
-        }
-
-        // ==================== VER DETALLE DE SECUENCIA ====================
         function openSequenceDetail(id) {
             const seq = sequences.find(s => s.id === id);
             openModal('sequence-detail');
             document.getElementById('modalTitle').textContent = seq.title;
             document.getElementById('modalBody').innerHTML = `
                 <div class="sequence-detail-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <div class="label">Grado</div>
-                        <div class="value">${seq.grade}</div>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i>
-                        <div class="label">Duración</div>
-                        <div class="value">${seq.duration}</div>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="label">Contexto</div>
-                        <div class="value">${seq.context}</div>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-tags"></i>
-                        <div class="label">Área</div>
-                        <div class="value">${seq.area}</div>
-                    </div>
+                    <div class="meta-item"><i class="fas fa-graduation-cap"></i><div class="label">Grado</div><div class="value">${seq.grade}</div></div>
+                    <div class="meta-item"><i class="fas fa-clock"></i><div class="label">Duración</div><div class="value">${seq.duration}</div></div>
+                    <div class="meta-item"><i class="fas fa-map-marker-alt"></i><div class="label">Contexto</div><div class="value">${seq.context}</div></div>
                 </div>
-                
-                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-align-left" style="color: var(--primary);"></i> Descripción</h4>
-                <p style="margin-bottom: 1.5rem;">${seq.description}</p>
-                
-                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-bullseye" style="color: var(--primary);"></i> Competencias desarrolladas</h4>
-                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                    ${seq.competencias.map(comp => `
-                        <span class="tag tag-indagacion">${comp}</span>
-                    `).join('')}
-                </div>
-                
-                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-list-ol" style="color: var(--primary);"></i> Sesiones de la secuencia</h4>
-                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                    ${seq.sesiones.map(sesion => `<li style="margin-bottom: 0.5rem;">${sesion}</li>`).join('')}
-                </ol>
-                
-                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-folder-open" style="color: var(--primary);"></i> Recursos incluidos</h4>
-                <div class="resources-list" style="margin-bottom: 1.5rem;">
-                    ${seq.recursos.map(recurso => `
-                        <div class="resource-item">
-                            <i class="fas fa-file-alt"></i>
-                            <div class="resource-info">
-                                <h4>${recurso}</h4>
-                                <p>Documento descargable en formato PDF</p>
-                            </div>
-                            <button class="btn btn-small btn-outline" onclick="alert('Descargando ${recurso}...')">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--secondary); margin-bottom: 1.5rem;">
-                    <strong><i class="fas fa-lightbulb"></i> ¿Por qué es pedagógicamente válida?</strong>
-                    <p style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.95rem;">
-                        Esta secuencia parte del entorno inmediato del estudiante, genera cognición disonante 
-                        al confrontar predicciones con datos reales, y culmina en una propuesta de acción concreta.
-                    </p>
-                </div>
-                
-                <div style="display: flex; gap: 1rem;">
-                    <button class="btn btn-primary" onclick="downloadSequence(${seq.id})" style="flex: 1;">
+                <p>${seq.description}</p>
+                <div style="margin-top: 1.5rem;">
+                    <button class="btn btn-primary" onclick="alert('Descargando secuencia...')" style="width: 100%;">
                         <i class="fas fa-download"></i> Descargar secuencia completa
-                    </button>
-                    <button class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">
-                        <i class="fas fa-times"></i> Cerrar
                     </button>
                 </div>
             `;
         }
 
-        function downloadSequence(id) {
-            const seq = sequences.find(s => s.id === id);
-            alert(`Descargando: ${seq.title}\n\nEn una implementación real, esto generaría un PDF con toda la secuencia didáctica.`);
-        }
-
-        // ==================== DATOS Y FUNCIONES EXISTENTES ====================
-        const inquirySteps = [
-            {
-                num: 1, title: "Planteamiento del Problema",
-                desc: "Formular una pregunta investigable, clara y conectada con el contexto del estudiante.",
-                example: "Ejemplo válido: '¿Cómo afecta la salinidad del agua del río a la flotación de objetos?'\nError común: 'Investigar sobre el agua' (muy amplia)"
-            },
-            {
-                num: 2, title: "Identificación de Variables",
-                desc: "Variable independiente (lo que cambias), dependiente (lo que mides) y controladas (lo que mantienes constante).",
-                example: "Ejemplo: En '¿Cómo afecta la temperatura a la velocidad de disolución?'\n• Independiente: Temperatura\n• Dependiente: Tiempo de disolución\n• Controladas: Cantidad de agua, tipo de azúcar"
-            },
-            {
-                num: 3, title: "Hipótesis Argumentada",
-                desc: "Respuesta tentativa basada en conocimiento previo, expresada como relación entre variables.",
-                example: "Buena hipótesis: 'Si aumenta la temperatura, entonces el azúcar se disolverá más rápido porque...'\nHipótesis débil: 'Creo que el azúcar se disuelve en agua caliente.'"
-            }
-        ];
-
-        const techResources = [
-            {
-                title: "PhET Simulaciones", type: "Simulador",
-                competency: "Explica el mundo natural", offline: true,
-                description: "Simulaciones interactivas de física, química y biología. Funcionan offline.",
-                useCase: "Antes de experimentación real o cuando no hay materiales"
-            },
-            {
-                title: "Science Journal", type: "App móvil",
-                competency: "Indaga mediante métodos científicos", offline: true,
-                description: "Usa sensores del celular para recolectar datos. Exporta a CSV.",
-                useCase: "Toma de datos en salidas de campo sin equipo especializado"
-            }
-        ];
-
-        function renderInquirySteps() {
-            const container = document.getElementById('inquirySteps');
-            container.innerHTML = inquirySteps.map(step => `
-                <div class="step">
-                    <div class="step-number">${step.num}</div>
-                    <div class="step-content">
-                        <h3>${step.title}</h3>
-                        <p>${step.desc}</p>
-                        <div class="example-box">
-                            <strong>Ejemplo:</strong><br>${step.example.replace(/\n/g, '<br>')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderTech() {
-            const grid = document.getElementById('techGrid');
-            grid.innerHTML = techResources.map(tech => `
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-tag tag-tecnologia">${tech.type}</span>
-                        ${tech.offline ? '<span style="color: var(--secondary); font-size: 0.75rem;"><i class="fas fa-wifi-slash"></i></span>' : ''}
-                    </div>
-                    <div class="card-body">
-                        <h3>${tech.title}</h3>
-                        <p style="font-size: 0.8rem; color: var(--primary);"><i class="fas fa-bullseye"></i> ${tech.competency}</p>
-                        <p>${tech.description}</p>
-                        <div style="padding: 0.75rem; background: var(--bg); border-radius: 0.5rem; font-size: 0.875rem;">
-                            <strong>¿Cuándo usarlo?</strong> ${tech.useCase}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // ==================== FIREBASE: CARGAR CONSULTAS ====================
+        // ==================== FIREBASE Y MODALES (código existente) ====================
         function loadQuestions() {
             const loadingDiv = document.getElementById('loadingQuestions');
             const listDiv = document.getElementById('questionsList');
             
-            db.collection('questions')
-                .orderBy('timestamp', 'desc')
-                .limit(10)
-                .get()
+            db.collection('questions').orderBy('timestamp', 'desc').limit(10).get()
                 .then(snapshot => {
                     loadingDiv.style.display = 'none';
                     listDiv.style.display = 'flex';
                     
                     if (snapshot.empty) {
-                        listDiv.innerHTML = '<div class="empty-state"><i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i><p>No hay consultas aún. ¡Sé el primero en preguntar!</p></div>';
+                        listDiv.innerHTML = '<div class="empty-state"><i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i><p>No hay consultas aún.</p></div>';
                         return;
                     }
                     
@@ -995,22 +1323,17 @@
                         const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('es-ES') : 'Reciente';
                         const initials = data.author ? data.author.substring(0, 2).toUpperCase() : 'AN';
                         const isAnswered = data.answered;
-                        const statusClass = isAnswered ? '' : 'pending';
-                        const avatarClass = isAnswered ? '' : 'pending';
                         
                         return `
-                            <div class="discussion-item ${statusClass}" onclick="openQuestionDetail('${doc.id}')">
-                                <div class="discussion-avatar ${avatarClass}">${initials}</div>
+                            <div class="discussion-item ${isAnswered ? '' : 'pending'}" onclick="openQuestionDetail('${doc.id}')">
+                                <div class="discussion-avatar ${isAnswered ? '' : 'pending'}">${initials}</div>
                                 <div class="discussion-content">
                                     <h4>${data.title}</h4>
                                     <p>${data.content.substring(0, 100)}${data.content.length > 100 ? '...' : ''}</p>
                                     <div class="discussion-meta">
-                                        <span><i class="fas fa-user"></i> ${data.author} - ${data.grade}</span>
+                                        <span><i class="fas fa-user"></i> ${data.author}</span>
                                         <span><i class="fas fa-clock"></i> ${date}</span>
-                                        ${isAnswered ? 
-                                            '<span style="color: var(--secondary);"><i class="fas fa-check-circle"></i> Respondido - Ver respuesta</span>' : 
-                                            '<span style="color: var(--accent);"><i class="fas fa-clock"></i> Pendiente</span>'
-                                        }
+                                        ${isAnswered ? '<span style="color: var(--secondary);"><i class="fas fa-check-circle"></i> Respondido</span>' : '<span style="color: var(--accent);"><i class="fas fa-clock"></i> Pendiente</span>'}
                                     </div>
                                 </div>
                             </div>
@@ -1018,8 +1341,8 @@
                     }).join('');
                 })
                 .catch(error => {
-                    console.error("Error cargando consultas:", error);
-                    loadingDiv.innerHTML = '<p style="color: #dc2626;">Error al cargar. Recarga la página.</p>';
+                    console.error("Error:", error);
+                    loadingDiv.innerHTML = '<p style="color: #dc2626;">Error al cargar.</p>';
                 });
         }
 
@@ -1034,54 +1357,36 @@
                 
                 document.getElementById('modalBody').innerHTML = `
                     <div style="margin-bottom: 1.5rem;">
-                        <span class="tag ${data.answered ? 'tag-evaluacion' : 'tag-tecnologia'}" style="margin-bottom: 1rem; display: inline-block;">
-                            ${data.answered ? 'Respondido' : 'Pendiente'}
-                        </span>
                         <h3 style="margin-bottom: 0.5rem;">${data.title}</h3>
                         <div class="discussion-meta" style="margin-bottom: 1rem;">
                             <span><i class="fas fa-user"></i> ${data.author}</span>
                             <span><i class="fas fa-graduation-cap"></i> ${data.grade}</span>
-                            <span><i class="fas fa-tag"></i> ${data.type}</span>
                             <span><i class="fas fa-clock"></i> ${date}</span>
                         </div>
                     </div>
-                    
                     <div style="background: var(--bg); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                        <h4 style="margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.875rem; text-transform: uppercase;">Consulta:</h4>
+                        <h4 style="margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.875rem;">Consulta:</h4>
                         <p style="margin: 0;">${data.content}</p>
                     </div>
-                    
                     ${data.answered ? `
                         <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
-                            <h4 style="margin-bottom: 0.75rem; color: var(--secondary);">
-                                <i class="fas fa-reply"></i> Respuesta del Especialista CyT
-                            </h4>
-                            <p style="margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.6;">${data.response || 'Sin texto de respuesta'}</p>
-                            <small style="color: var(--text-light);">
-                                <i class="fas fa-clock"></i> Respondido el: ${responseDate}
-                            </small>
+                            <h4 style="margin-bottom: 0.75rem; color: var(--secondary);"><i class="fas fa-reply"></i> Respuesta del Especialista</h4>
+                            <p style="margin-bottom: 1rem;">${data.response || 'Sin texto'}</p>
+                            <small style="color: var(--text-light);"><i class="fas fa-clock"></i> ${responseDate}</small>
                         </div>
-                    ` : `
-                        <div style="background: #fef3c7; padding: 1rem; border-radius: 0.5rem; text-align: center;">
-                            <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;"></i>
-                            <p>Esta consulta está pendiente de respuesta. El especialista responderá pronto.</p>
-                        </div>
-                    `}
+                    ` : '<div style="background: #fef3c7; padding: 1rem; border-radius: 0.5rem; text-align: center;"><p>Consulta pendiente de respuesta.</p></div>'}
                 `;
             });
         }
 
-        // ==================== FIREBASE: ENVIAR CONSULTA ====================
         function submitQuestion(e) {
             e.preventDefault();
             const form = e.target;
             const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
             submitBtn.innerHTML = '<div class="loading" style="width: 16px; height: 16px; border-width: 2px; margin-right: 0.5rem;"></div> Enviando...';
             submitBtn.disabled = true;
             
-            const questionData = {
+            db.collection('questions').add({
                 title: form.title.value,
                 content: form.content.value,
                 type: form.type.value,
@@ -1089,90 +1394,56 @@
                 grade: form.grade.value,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 answered: false
-            };
-            
-            db.collection('questions').add(questionData)
-                .then(() => {
-                    form.reset();
-                    closeModal();
-                    alert('¡Consulta enviada exitosamente! El especialista responderá pronto.');
-                    loadQuestions();
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert('Error al enviar: ' + error.message);
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                });
+            }).then(() => {
+                form.reset();
+                closeModal();
+                alert('¡Consulta enviada!');
+                loadQuestions();
+            }).catch(error => {
+                alert('Error: ' + error.message);
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar';
+                submitBtn.disabled = false;
+            });
         }
 
-        // ==================== MODALES ====================
         function openModal(type) {
             const modal = document.getElementById('modal');
             const title = document.getElementById('modalTitle');
             const body = document.getElementById('modalBody');
-            
             modal.classList.add('active');
             
-            switch(type) {
-                case 'new-question':
-                    title.textContent = 'Nueva Consulta a la Comunidad';
-                    body.innerHTML = `
-                        <form onsubmit="submitQuestion(event)">
-                            <label>Título de tu consulta:</label>
-                            <input type="text" name="title" placeholder="Ej: ¿Cómo evaluar diseño tecnológico sin materiales?" required>
-                            
-                            <label>Describe tu situación:</label>
-                            <textarea name="content" rows="4" placeholder="Contexto de tu escuela, grado, duda específica..." required></textarea>
-                            
-                            <label>Tu nombre:</label>
-                            <input type="text" name="author" placeholder="Prof. Juan Pérez">
-                            
-                            <label>Grado que enseñas:</label>
-                            <select name="grade" required>
-                                <option value="">Selecciona...</option>
-                                <option value="1° Secundaria">1° Secundaria</option>
-                                <option value="2° Secundaria">2° Secundaria</option>
-                                <option value="3° Secundaria">3° Secundaria</option>
-                                <option value="4° Secundaria">4° Secundaria</option>
-                                <option value="5° Secundaria">5° Secundaria</option>
-                                <option value="Todos">Todos los grados</option>
-                            </select>
-                            
-                            <label>Tipo de consulta:</label>
-                            <select name="type" required>
-                                <option value="Diseño de sesión">Diseño de sesión</option>
-                                <option value="Evaluación">Evaluación/Evidencias</option>
-                                <option value="Indagación">Indagación científica</option>
-                                <option value="Recursos">Uso de recursos</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                            
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i> Enviar consulta
-                            </button>
-                            <p style="font-size: 0.875rem; color: var(--text-light); margin-top: 1rem; text-align: center;">
-                                <i class="fas fa-shield-alt"></i> Las consultas son moderadas por el especialista
-                            </p>
-                        </form>
-                    `;
-                    break;
-                    
-                case 'rubric-builder':
-                    title.textContent = 'Constructor de Rúbricas';
-                    body.innerHTML = `
-                        <div style="background: var(--bg); padding: 1rem; border-radius: 0.5rem;">
-                            <p>Selecciona la competencia:</p>
-                            <select onchange="generateRubric(this.value)" style="margin-top: 0.5rem;">
-                                <option value="">Selecciona...</option>
-                                <option value="indaga">Indaga mediante métodos científicos</option>
-                                <option value="explica">Explica el mundo natural</option>
-                                <option value="disena">Diseña soluciones tecnológicas</option>
-                            </select>
-                        </div>
-                        <div id="rubricResult" style="margin-top: 1rem;"></div>
-                    `;
-                    break;
+            if (type === 'new-question') {
+                title.textContent = 'Nueva Consulta';
+                body.innerHTML = `
+                    <form onsubmit="submitQuestion(event)">
+                        <label>Título:</label>
+                        <input type="text" name="title" placeholder="Ej: ¿Cómo evaluar...?" required>
+                        <label>Descripción:</label>
+                        <textarea name="content" rows="4" required></textarea>
+                        <label>Tu nombre:</label>
+                        <input type="text" name="author" placeholder="Prof. Juan Pérez">
+                        <label>Grado:</label>
+                        <select name="grade" required>
+                            <option value="">Selecciona...</option>
+                            <option value="1° Secundaria">1° Secundaria</option>
+                            <option value="2° Secundaria">2° Secundaria</option>
+                            <option value="3° Secundaria">3° Secundaria</option>
+                            <option value="4° Secundaria">4° Secundaria</option>
+                            <option value="5° Secundaria">5° Secundaria</option>
+                        </select>
+                        <label>Tipo:</label>
+                        <select name="type" required>
+                            <option value="Diseño de sesión">Diseño de sesión</option>
+                            <option value="Evaluación">Evaluación</option>
+                            <option value="Indagación">Indagación</option>
+                            <option value="Recursos">Recursos</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Enviar</button>
+                    </form>
+                `;
+            } else if (type === 'rubric-builder') {
+                title.textContent = 'Constructor de Rúbricas';
+                body.innerHTML = '<p>Selecciona competencia...</p>';
             }
         }
 
@@ -1180,66 +1451,26 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        function generateRubric(competency) {
-            const result = document.getElementById('rubricResult');
-            if (!competency) {
-                result.innerHTML = '';
-                return;
-            }
-            
-            const rubrics = {
-                indaga: [
-                    ['Planteamiento del problema', 'Pregunta no investigable', 'Pregunta investigable pero variables no claras', 'Pregunta clara con variables identificadas'],
-                    ['Hipótesis', 'No relaciona variables', 'Relaciona variables sin justificación', 'Relaciona variables con justificación'],
-                    ['Diseño experimental', 'Procedimiento confuso', 'Procedimiento claro pero omite controles', 'Procedimiento claro y seguro']
-                ]
-            };
-            
-            const data = rubrics[competency] || rubrics.indaga;
-            
-            result.innerHTML = `
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 1rem;">
-                    <tr style="background: var(--primary); color: white;">
-                        <th style="padding: 0.75rem; border: 1px solid var(--border); text-align: left;">Criterio</th>
-                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Inicial</th>
-                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Proceso</th>
-                        <th style="padding: 0.75rem; border: 1px solid var(--border);">Satisfactorio</th>
-                    </tr>
-                    ${data.map(row => `
-                        <tr>
-                            <td style="padding: 0.75rem; border: 1px solid var(--border); font-weight: 600;">${row[0]}</td>
-                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[1]}</td>
-                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[2]}</td>
-                            <td style="padding: 0.75rem; border: 1px solid var(--border);">${row[3]}</td>
-                        </tr>
-                    `).join('')}
-                </table>
-                <button class="btn btn-primary" style="margin-top: 1rem;" onclick="window.print()">
-                    <i class="fas fa-print"></i> Imprimir rúbrica
-                </button>
-            `;
-        }
-
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
-            alert('Usa la navegación inferior en móvil');
+            alert('Usa navegación inferior en móvil');
         }
 
         // ==================== INICIALIZACIÓN ====================
         document.addEventListener('DOMContentLoaded', () => {
             renderSequences();
-            renderInquirySteps();
-            renderTech();
+            renderIndagacionSteps();
+            renderDisenoSteps();
             loadQuestions();
             
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
                 });
             });
         });
