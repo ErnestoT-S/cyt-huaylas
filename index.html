@@ -843,8 +843,8 @@
                         <thead>
                             <tr>
                                 <th>Competencia/Desempeño</th>
-                                <th>1 - En Proceso</th>
-                                <th>2 - Logro Intermedio</th>
+                                <th>1 - En Inicio</th>
+                                <th>2 - En Proceso</th>
                                 <th>3 - Logro Esperado</th>
                                 <th>4 - Destacado</th>
                             </tr>
@@ -906,78 +906,85 @@
             </div>
 
             <!-- Rúbrica Diseño -->
-            <div id="rubrica-diseno" class="eval-content">
-                <h3 style="margin-bottom: 1rem; color: var(--purple);"><i class="fas fa-cogs"></i> Rúbrica de Diseño Tecnológico</h3>
-                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Evalúa soluciones tecnológicas sostenibles del contexto local</p>
-                
-                <div class="rubrica-cards">
-                    <div class="rubrica-card">
-                        <div class="rubrica-card-header">
-                            <h4>Identificación de Necesidad</h4>
-                            <span class="peso">20%</span>
-                        </div>
-                        <ul class="niveles">
-                            <li><strong>4:</strong> Necesidad real validada con usuarios de la comunidad/Huaylas. Análisis profundo del contexto</li>
-                            <li><strong>3:</strong> Necesidad real del entorno escolar/comunal, bien definida y factible</li>
-                            <li><strong>2:</strong> Necesidad identificada pero poco clara o no prioritaria</li>
-                            <li><strong>1:</strong> Solución buscando problema. No hay necesidad real identificada</li>
-                        </ul>
-                    </div>
-
-                    <div class="rubrica-card">
-                        <div class="rubrica-card-header">
-                            <h4>Investigación del Estado del Arte</h4>
-                            <span class="peso">15%</span>
-                        </div>
-                        <ul class="niveles">
-                            <li><strong>4:</strong> Investiga saberes locales + soluciones modernas. Propone mejora innovadora</li>
-                            <li><strong>3:</strong> Consulta diversas fuentes (abuelos, internet, libros) y adapta soluciones</li>
-                            <li><strong>2:</strong> Solo busca en internet o solo pregunta a familiares</li>
-                            <li><strong>1:</strong> No investiga. "Inventa" sin buscar referencias</li>
-                        </ul>
-                    </div>
-
-                    <div class="rubrica-card">
-                        <div class="rubrica-card-header">
-                            <h4>Diseño y Prototipo</h4>
-                            <span class="peso">25%</span>
-                        </div>
-                        <ul class="niveles">
-                            <li><strong>4:</strong> Bocetos detallados, lista de materiales locales/reciclados, planificación de ensamblaje</li>
-                            <li><strong>3:</strong> Dibujo claro, materiales accesibles, función explicada, criterios de éxito definidos</li>
-                            <li><strong>2:</strong> Boceto simple, materiales costosos o difíciles de conseguir en Huaylas</li>
-                            <li><strong>1:</strong> Sin boceto. Materiales irreales o peligrosos</li>
-                        </ul>
-                    </div>
-
-                    <div class="rubrica-card">
-                        <div class="rubrica-card-header">
-                            <h4>Construcción y Prueba</h4>
-                            <span class="peso">25%</span>
-                        </div>
-                        <ul class="niveles">
-                            <li><strong>4:</strong> Construcción segura, pruebas rigurosas (3+ veces), registro fotográfico, ajustes documentados</li>
-                            <li><strong>3:</strong> Prototipo funcional, probado al menos 2 veces, registro de datos en tabla</li>
-                            <li><strong>2:</strong> Prototipo frágil o inseguro, una sola prueba, datos incompletos</li>
-                            <li><strong>1:</strong> No termina la construcción o prototipo no funciona</li>
-                        </ul>
-                    </div>
-
-                    <div class="rubrica-card">
-                        <div class="rubrica-card-header">
-                            <h4>Iteración y Mejora</h4>
-                            <span class="peso">15%</span>
-                        </div>
-                        <ul class="niveles">
-                            <li><strong>4:</strong> Mejoras implementadas y probadas. Análisis costo-beneficio y sostenibilidad</li>
-                            <li><strong>3:</strong> Identifica fallas, propone mejoras concretas y factibles, versión 2.0</li>
-                            <li><strong>2:</strong> Reconoce errores pero no propone soluciones claras</li>
-                            <li><strong>1:</strong> No reconoce errores o culpa a factores externos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+           <div id="rubrica-diseno" class="eval-content">
+    <h3 style="margin-bottom: 1rem; color: var(--purple);"><i class="fas fa-cogs"></i> Rúbrica de Diseño Tecnológico</h3>
+    <p style="margin-bottom: 1.5rem; color: var(--text-light);">Evalúa el proceso completo de diseño: desde la identificación de necesidades hasta la iteración. Puntuación: 1 (Inicial) a 4 (Satisfactorio)</p>
+    
+    <div class="rubrica-table-container">
+        <table class="rubrica-table">
+            <thead>
+                <tr>
+                    <th>Competencia/Desempeño</th>
+                    <th>1 - En Proceso</th>
+                    <th>2 - Logro Intermedio</th>
+                    <th>3 - Logro Esperado</th>
+                    <th>4 - Destacado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="criterio" style="background: #faf5ff !important; color: #6b21a8;"><strong>Identifica necesidades</strong><br><small>Reconocimiento de problemas</small></td>
+                    <td>Propone soluciones sin identificar una necesidad real previa. El problema es inventado o no existe en el contexto.</td>
+                    <td>Identifica una necesidad pero es muy general o poco relevante para el contexto escolar/comunal.</td>
+                    <td>Detecta necesidad real del entorno (escuela, hogar, comunidad) que afecta a personas específicas y es factible de resolver.</td>
+                    <td>Valida la necesidad con usuarios reales (entrevistas, observación). Analiza profundamente el contexto de Huaylas y propone alternativas innovadoras.</td>
+                </tr>
+                <tr>
+                    <td class="criterio" style="background: #faf5ff !important; color: #6b21a8;"><strong>Investiga el estado del arte</strong><br><small>Búsqueda de soluciones</small></td>
+                    <td>No investiga. Propone diseños sin buscar referencias o copia exactamente sin adaptar.</td>
+                    <td>Busca en una sola fuente (solo internet o solo opinión personal). No compara alternativas.</td>
+                    <td>Consulta diversas fuentes (saberes locales, internet, libros). Adapta soluciones existentes al contexto y recursos disponibles.</td>
+                    <td>Investiga saberes ancestrales locales + soluciones modernas. Propone mejoras innovadoras a lo existente y documenta fuentes.</td>
+                </tr>
+                <tr>
+                    <td class="criterio" style="background: #faf5ff !important; color: #6b21a8;"><strong>Diseña la propuesta</strong><br><small>Planificación y bocetos</small></td>
+                    <td>Sin bocetos o dibujos confusos. Materiales irreales o peligrosos. No define cómo funcionará.</td>
+                    <td>Boceto simple sin detalles. Materiales costosos o difíciles de conseguir en Huaylas. Funcionamiento poco claro.</td>
+                    <td>Dibujos claros (vistas frontales/laterales), lista detallada de materiales locales/reciclados, explicación del funcionamiento y criterios de éxito definidos.</td>
+                    <td>Bocetos técnicos detallados con medidas. Planificación de ensamblaje paso a paso. Análisis de sostenibilidad y seguridad integrados.</td>
+                </tr>
+                <tr>
+                    <td class="criterio" style="background: #faf5ff !important; color: #6b21a8;"><strong>Construye y prueba</strong><br><small>Prototipado y validación</small></td>
+                    <td>No termina la construcción o prototipo inseguro/inestable. No realiza pruebas.</td>
+                    <td>Prototipo frágil o con riesgos de seguridad. Una sola prueba sin registro sistemático de datos.</td>
+                    <td>Construcción segura y funcional. Prueba al menos 2 veces bajo condiciones reales. Registra datos en tablas con fotografías del proceso.</td>
+                    <td>Prototipo robusto usando técnicas adecuadas. Pruebas rigurosas (3+ veces), identificación de fallas, ajustes documentados y registro fotográfico completo.</td>
+                </tr>
+                <tr>
+                    <td class="criterio" style="background: #faf5ff !important; color: #6b21a8;"><strong>Evalúa e itera</strong><br><small>Mejora continua</small></td>
+                    <td>No reconoce errores o culpa a factores externos. No propone mejoras.</td>
+                    <td>Reconoce que hay problemas pero no propone soluciones claras o factibles.</td>
+                    <td>Compara resultados con criterios de éxito definidos. Identifica fallas específicas y propone mejoras concretas aplicables (versión 2.0).</td>
+                    <td>Implementa mejoras y las vuelve a probar. Análisis costo-beneficio, sostenibilidad a largo plazo y propuesta de escalabilidad para la comunidad.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="calc-box" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-color: #d8b4fe;">
+        <h4 style="margin-top: 0; color: var(--purple);"><i class="fas fa-calculator"></i> Calculadora Rápida</h4>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Selecciona el nivel alcanzado en cada criterio:</p>
+        <div class="calc-row">
+            <label>Necesidad: <select onchange="calcularNotaDiseno()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+            <label>Investigación: <select onchange="calcularNotaDiseno()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+            <label>Diseño: <select onchange="calcularNotaDiseno()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+            <label>Construcción: <select onchange="calcularNotaDiseno()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+            <label>Iteración: <select onchange="calcularNotaDiseno()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+        </div>
+        <div style="text-align: center;">
+            <div class="resultado-final" style="color: var(--purple);">Promedio: <span id="promedio-diseno">3.0</span> / 4.0</div>
+        </div>
+    </div>
+</div>
+function calcularNotaDiseno() {
+    const selects = document.querySelectorAll('#rubrica-diseno select');
+    let suma = 0;
+    selects.forEach(select => {
+        suma += parseInt(select.value);
+    });
+    const promedio = (suma / selects.length).toFixed(1);
+    document.getElementById('promedio-diseno').textContent = promedio;
+}
             <!-- Autoevaluación -->
             <div id="autoevaluacion" class="eval-content">
                 <h3 style="margin-bottom: 1rem; color: var(--secondary);"><i class="fas fa-user-check"></i> Autoevaluación para Estudiantes</h3>
