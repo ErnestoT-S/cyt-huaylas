@@ -976,15 +976,6 @@
         </div>
     </div>
 </div>
-function calcularNotaDiseno() {
-    const selects = document.querySelectorAll('#rubrica-diseno select');
-    let suma = 0;
-    selects.forEach(select => {
-        suma += parseInt(select.value);
-    });
-    const promedio = (suma / selects.length).toFixed(1);
-    document.getElementById('promedio-diseno').textContent = promedio;
-}
             <!-- Autoevaluación -->
             <div id="autoevaluacion" class="eval-content">
                 <h3 style="margin-bottom: 1rem; color: var(--secondary);"><i class="fas fa-user-check"></i> Autoevaluación para Estudiantes</h3>
@@ -1108,7 +1099,6 @@ function calcularNotaDiseno() {
                             <li><em>"Tu quebrada/comunidad necesitaría..."</em> (contextualizar)</li>
                         </ul>
                     </div>
-
                     <div class="feedback-card registro-card">
                         <h4><i class="fas fa-clipboard"></i> Registro Rápido de Observaciones</h4>
                         <div class="quick-form">
@@ -2030,6 +2020,26 @@ function calcularNotaDiseno() {
             const modal = document.getElementById('modal');
             if (event.target === modal) closeModal();
         }
+        <script>
+        function calcularNotaIndagacion() {
+    const selects = document.querySelectorAll('#rubrica-indagacion select');
+    let suma = 0;
+    selects.forEach(select => {
+        suma += parseInt(select.value);
+    });
+    const promedio = (suma / selects.length).toFixed(1);
+    document.getElementById('promedio-indagacion').textContent = promedio;
+}
+
+function calcularNotaDiseno() {
+    const selects = document.querySelectorAll('#rubrica-diseno select');
+    let suma = 0;
+    selects.forEach(select => {
+        suma += parseInt(select.value);
+    });
+    const promedio = (suma / selects.length).toFixed(1);
+    document.getElementById('promedio-diseno').textContent = promedio;
+}
     </script>
 </body>
 </html>
