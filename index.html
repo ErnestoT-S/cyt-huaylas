@@ -17,6 +17,7 @@
             --primary-dark: #1d4ed8;
             --secondary: #059669;
             --accent: #f59e0b;
+            --danger: #dc2626;
             --bg: #f8fafc;
             --card: #ffffff;
             --text: #1e293b;
@@ -24,6 +25,7 @@
             --border: #e2e8f0;
             --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,6 +74,10 @@
         .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); }
         .btn-secondary:hover { background: rgba(255,255,255,0.2); }
         .btn-small { padding: 0.5rem 1rem; font-size: 0.875rem; }
+        .btn-outline {
+            background: transparent; border: 2px solid var(--primary); color: var(--primary);
+        }
+        .btn-outline:hover { background: var(--primary); color: white; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
@@ -95,31 +101,107 @@
         .section-header h2 { font-size: 2rem; color: var(--text); margin-bottom: 0.5rem; }
         .section-header p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .card {
-            background: var(--card); border-radius: 0.75rem; overflow: hidden;
-            box-shadow: var(--shadow); border: 1px solid var(--border);
-            transition: all 0.3s; cursor: pointer;
+        /* SECCION SECUENCIAS MEJORADA */
+        .sequences-toolbar {
+            background: var(--card); padding: 1.5rem; border-radius: 0.75rem;
+            box-shadow: var(--shadow); margin-bottom: 1.5rem;
+            display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
         }
-        .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .search-box {
+            flex: 1; min-width: 250px; position: relative;
+        }
+        .search-box input {
+            width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border); border-radius: 0.5rem;
+            font-size: 0.95rem; transition: all 0.2s;
+        }
+        .search-box input:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .search-box i {
+            position: absolute; left: 0.875rem; top: 50%;
+            transform: translateY(-50%); color: var(--text-light);
+        }
+        .filter-group {
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.625rem 1rem; border: 1px solid var(--border);
+            background: white; border-radius: 0.5rem; cursor: pointer;
+            font-size: 0.875rem; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .filter-btn:hover { border-color: var(--primary); }
+        .filter-btn.active {
+            background: var(--primary); color: white; border-color: var(--primary);
+        }
+        .results-count {
+            font-size: 0.875rem; color: var(--text-light); margin-bottom: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--card); border-radius: 1rem; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+            transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-xl); transform: translateY(-4px);
+        }
+        .card-image {
+            height: 160px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .card-image i { font-size: 3rem; color: rgba(255,255,255,0.3); }
+        .card-badge {
+            position: absolute; top: 1rem; right: 1rem;
+            background: rgba(255,255,255,0.95); padding: 0.375rem 0.75rem;
+            border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+            display: flex; align-items: center; gap: 0.25rem;
+        }
         .card-header {
             padding: 1.25rem; border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: start;
         }
         .card-tag {
             display: inline-flex; align-items: center; gap: 0.25rem;
-            padding: 0.25rem 0.75rem; border-radius: 9999px;
+            padding: 0.375rem 0.875rem; border-radius: 9999px;
             font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            margin-bottom: 0.75rem;
         }
         .tag-indagacion { background: #dbeafe; color: #1e40af; }
         .tag-evaluacion { background: #dcfce7; color: #166534; }
         .tag-tecnologia { background: #fef3c7; color: #92400e; }
         .tag-comunidad { background: #f3e8ff; color: #7c3aed; }
-        .card-body { padding: 1.25rem; }
-        .card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); }
+        .tag-diseno { background: #fce7f3; color: #9d174d; }
+        
+        .card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); line-height: 1.4; }
         .card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
-        .card-meta { display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-light); }
+        
+        .card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+        .card-meta {
+            display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-light);
+            margin-bottom: 1rem; flex-wrap: wrap;
+        }
         .card-meta span { display: flex; align-items: center; gap: 0.25rem; }
+        
+        .card-footer {
+            padding: 1rem 1.25rem; border-top: 1px solid var(--border);
+            display: flex; gap: 0.5rem;
+        }
+        .card-footer .btn { flex: 1; justify-content: center; font-size: 0.875rem; padding: 0.625rem; }
+        
+        .card-features {
+            display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .feature-tag {
+            background: var(--bg); padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem; font-size: 0.75rem;
+            color: var(--text-light); display: flex; align-items: center; gap: 0.25rem;
+        }
 
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .tool-card {
@@ -143,12 +225,16 @@
         .discussion-item {
             background: white; padding: 1.25rem; border-radius: 0.5rem;
             border-left: 4px solid var(--secondary); display: flex; gap: 1rem; align-items: start;
+            cursor: pointer; transition: all 0.2s;
         }
+        .discussion-item:hover { box-shadow: var(--shadow); }
+        .discussion-item.pending { border-left-color: var(--accent); }
         .discussion-avatar {
             width: 40px; height: 40px; background: var(--secondary); color: white;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-weight: 600; flex-shrink: 0;
         }
+        .discussion-avatar.pending { background: var(--accent); }
         .discussion-content h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
         .discussion-content p { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem; }
         .discussion-meta { font-size: 0.8rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -156,11 +242,13 @@
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 1rem;
+            overflow-y: auto;
         }
         .modal.active { display: flex; }
         .modal-content {
             background: white; border-radius: 1rem; max-width: 800px; width: 100%;
             max-height: 90vh; overflow-y: auto; position: relative;
+            margin: auto;
         }
         .modal-header {
             padding: 1.5rem; border-bottom: 1px solid var(--border);
@@ -214,6 +302,9 @@
             .quick-access { grid-template-columns: 1fr; margin-top: -1rem; }
             .mobile-nav { display: flex; }
             .container { padding-bottom: 5rem; }
+            .sequences-toolbar { flex-direction: column; align-items: stretch; }
+            .search-box { min-width: 100%; }
+            .cards-grid { grid-template-columns: 1fr; }
         }
 
         .text-center { text-align: center; }
@@ -223,7 +314,29 @@
             border-radius: 0.375rem; font-family: inherit; margin-bottom: 1rem;
         }
         label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-        .empty-state { text-align: center; padding: 2rem; color: var(--text-light); }
+        .empty-state { text-align: center; padding: 3rem; color: var(--text-light); }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; color: var(--border); }
+        
+        .sequence-detail-meta {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
+            margin: 1.5rem 0; padding: 1rem; background: var(--bg); border-radius: 0.5rem;
+        }
+        .meta-item { text-align: center; }
+        .meta-item i { color: var(--primary); margin-bottom: 0.25rem; }
+        .meta-item .label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; }
+        .meta-item .value { font-weight: 600; color: var(--text); }
+        
+        .resources-list {
+            display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;
+        }
+        .resource-item {
+            display: flex; align-items: center; gap: 1rem; padding: 1rem;
+            background: var(--bg); border-radius: 0.5rem; border: 1px solid var(--border);
+        }
+        .resource-item i { font-size: 1.5rem; color: var(--primary); }
+        .resource-info { flex: 1; }
+        .resource-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .resource-info p { font-size: 0.875rem; color: var(--text-light); }
     </style>
 </head>
 <body>
@@ -289,11 +402,57 @@
     </div>
 
     <div class="container">
+        <!-- SECUENCIAS MEJORADAS -->
         <section id="secuencias" class="section">
             <div class="section-header">
                 <h2>Banco de Secuencias Didácticas</h2>
-                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad.</p>
+                <p>Sesiones validadas por el especialista, listas para adaptar a tu realidad. Filtra por grado, área o busca por palabra clave.</p>
             </div>
+            
+            <!-- Toolbar con búsqueda y filtros -->
+            <div class="sequences-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar secuencias..." onkeyup="filterSequences()">
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" onclick="filterByGrade('all')" id="filter-grade-all">
+                        <i class="fas fa-layer-group"></i> Todos
+                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('1°')" id="filter-grade-1">
+                        1° Sec
+                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('2°')" id="filter-grade-2">
+                        2° Sec
+                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('3°')" id="filter-grade-3">
+                        3° Sec
+                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('4°')" id="filter-grade-4">
+                        4° Sec
+                    </button>
+                    <button class="filter-btn" onclick="filterByGrade('5°')" id="filter-grade-5">
+                        5° Sec
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" onclick="filterByArea('all')" id="filter-area-all">
+                        <i class="fas fa-tags"></i> Todas
+                    </button>
+                    <button class="filter-btn" onclick="filterByArea('Indagación')" id="filter-area-indagacion">
+                        Indagación
+                    </button>
+                    <button class="filter-btn" onclick="filterByArea('Diseño')" id="filter-area-diseno">
+                        Diseño
+                    </button>
+                    <button class="filter-btn" onclick="filterByArea('Evaluación')" id="filter-area-evaluacion">
+                        Evaluación
+                    </button>
+                </div>
+            </div>
+            
+            <div class="results-count" id="resultsCount">Cargando secuencias...</div>
+            
             <div class="cards-grid" id="sequencesGrid"></div>
         </section>
 
@@ -357,6 +516,9 @@
         <footer style="text-align: center; padding: 3rem 0; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 4rem;">
             <p style="margin-bottom: 0.5rem;"><strong>UGEL Huaylas - Área de Ciencia y Tecnología</strong></p>
             <p style="font-size: 0.875rem;">Plataforma validada por el Especialista de CyT</p>
+            <p style="font-size: 0.875rem; margin-top: 1rem;">
+                <a href="admin.html" style="color: var(--text-light);"><i class="fas fa-lock"></i> Acceso Especialista</a>
+            </p>
         </footer>
     </div>
 
@@ -388,32 +550,359 @@
             appId: "1:663512465593:web:cd4a6601f51b6d48505b68"
         };
 
-        // Inicializar Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // ==================== DATOS ====================
+        // ==================== DATOS DE SECUENCIAS AMPLIADAS ====================
         const sequences = [
             {
-                id: 1, title: "¿Por qué se erosiona nuestra quebrada?", grade: "1° Secundaria",
-                area: "Indagación científica", duration: "4 sesiones", context: "Rural/Urbano",
-                description: "Secuencia completa sobre erosión del suelo usando el entorno local. Incluye salida de campo y propuesta de soluciones.",
-                tags: ["indagacion"], validated: true
+                id: 1, 
+                title: "¿Por qué se erosiona nuestra quebrada?",
+                grade: "1° Secundaria",
+                area: "Indagación científica",
+                duration: "4 sesiones",
+                context: "Rural/Urbano",
+                description: "Secuencia completa de indagación sobre erosión del suelo usando el entorno local. Incluye salida de campo, toma de muestras y propuesta de soluciones.",
+                tags: ["indagacion"],
+                validated: true,
+                competencias: ["Indaga", "Explica"],
+                recursos: ["Guía de campo", "Ficha de observación", "Rúbrica de evaluación"],
+                sesiones: [
+                    "Identificación del problema en la quebrada local",
+                    "Toma de muestras y observación de factores",
+                    "Análisis de datos y conclusiones",
+                    "Propuesta de soluciones y socialización"
+                ]
             },
             {
-                id: 2, title: "Diseño de un irrigador para la huerta escolar", grade: "2° Secundaria",
-                area: "Diseño tecnológico", duration: "6 sesiones", context: "Rural",
-                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales y evalúan eficacia.",
-                tags: ["evaluacion"], validated: true
+                id: 2, 
+                title: "Diseño de un irrigador para la huerta escolar",
+                grade: "2° Secundaria",
+                area: "Diseño tecnológico",
+                duration: "6 sesiones",
+                context: "Rural",
+                description: "Los estudiantes identifican necesidades de riego, proponen diseños con materiales locales (botellas, mangueras recicladas) y evalúan eficacia.",
+                tags: ["diseno"],
+                validated: true,
+                competencias: ["Diseña", "Evalúa"],
+                recursos: ["Plantilla de diseño", "Lista de materiales", "Matriz de evaluación"],
+                sesiones: [
+                    "Diagnóstico de necesidades de riego",
+                    "Investigación de soluciones existentes",
+                    "Bocetos y selección de propuesta",
+                    "Construcción del prototipo",
+                    "Prueba y registro de datos",
+                    "Mejora y presentación"
+                ]
             },
             {
-                id: 3, title: "¿El agua de mi comunidad es potable?", grade: "3° Secundaria",
-                area: "Indagación científica", duration: "5 sesiones", context: "Rural/Urbano",
-                description: "Análisis físico-químico básico del agua usando reactivos caseros. Conexión con derecho al agua.",
-                tags: ["indagacion", "evaluacion"], validated: true
+                id: 3, 
+                title: "¿El agua de mi comunidad es potable?",
+                grade: "3° Secundaria",
+                area: "Indagación científica",
+                duration: "5 sesiones",
+                context: "Rural/Urbano",
+                description: "Análisis físico-químico básico del agua usando reactivos caseros. Conexión con derecho al agua y propuestas de tratamiento.",
+                tags: ["indagacion"],
+                validated: true,
+                competencias: ["Indaga", "Comunica"],
+                recursos: ["Protocolo de análisis", "Tabla de resultados", "Infografía modelo"],
+                sesiones: [
+                    "Planteamiento del problema y hipótesis",
+                    "Diseño del muestreo",
+                    "Pruebas físico-químicas",
+                    "Análisis de resultados vs normas",
+                    "Propuesta de mejora y socialización"
+                ]
+            },
+            {
+                id: 4, 
+                title: "Simulando ecosistemas: El equilibrio natural",
+                grade: "1° Secundaria",
+                area: "Explicación científica",
+                duration: "3 sesiones",
+                context: "Urbano",
+                description: "Uso de simulador PhET para entender cadenas alimentarias antes de salida de campo. Incluye versión offline.",
+                tags: ["tecnologia"],
+                validated: true,
+                competencias: ["Explica", "Modela"],
+                recursos: ["Guía PhET offline", "Ficha de registro", "Video explicativo"],
+                sesiones: [
+                    "Exploración del simulador y predicciones",
+                    "Manipulación de variables y registro",
+                    "Conexión con ecosistema local real"
+                ]
+            },
+            {
+                id: 5, 
+                title: "Construyendo un termómetro casero",
+                grade: "2° Secundaria",
+                area: "Indagación científica",
+                duration: "2 sesiones",
+                context: "Rural",
+                description: "Diseño y calibración de termómetros con materiales de bajo costo. Comparación con termómetro estándar y análisis de error.",
+                tags: ["indagacion"],
+                validated: true,
+                competencias: ["Indaga", "Mide"],
+                recursos: ["Instrucciones de construcción", "Tabla de calibración", "Análisis de error"],
+                sesiones: [
+                    "Construcción y primeras mediciones",
+                    "Calibración y validación del instrumento"
+                ]
+            },
+            {
+                id: 6, 
+                title: "Evaluando mi huella ecológica",
+                grade: "3° Secundaria",
+                area: "Competencias ciudadanas",
+                duration: "3 sesiones",
+                context: "Urbano",
+                description: "Cálculo de huella ecológica personal y grupal. Propuesta de acciones de mitigación concretas para la escuela.",
+                tags: ["evaluacion"],
+                validated: true,
+                competencias: ["Evalúa", "Participa"],
+                recursos: ["Calculadora de huella", "Plan de acción", "Rúbrica de compromiso"],
+                sesiones: [
+                    "Cálculo individual y reflexión",
+                    "Análisis grupal y comparación",
+                    "Propuesta y compromiso de acciones"
+                ]
+            },
+            {
+                id: 7, 
+                title: "Diseño de un sistema de compostaje escolar",
+                grade: "4° Secundaria",
+                area: "Diseño tecnológico",
+                duration: "5 sesiones",
+                context: "Rural/Urbano",
+                description: "Diseño de compostera adaptada al espacio y necesidades de la escuela. Incluye manual de uso y mantenimiento.",
+                tags: ["diseno"],
+                validated: true,
+                competencias: ["Diseña", "Gestiona"],
+                recursos: ["Manual de compostaje", "Planos modelo", "Cronograma de mantenimiento"],
+                sesiones: [
+                    "Auditoría de residuos orgánicos",
+                    "Investigación de tecnologías de compostaje",
+                    "Diseño adaptado al contexto escolar",
+                    "Construcción y prueba piloto",
+                    "Manual de operación y difusión"
+                ]
+            },
+            {
+                id: 8, 
+                title: "¿Por qué varía la temperatura en mi localidad?",
+                grade: "5° Secundaria",
+                area: "Indagación científica",
+                duration: "4 sesiones",
+                context: "Rural/Urbano",
+                description: "Estudio de variables climáticas locales usando datos históricos y mediciones propias. Conexión con cambio climático global.",
+                tags: ["indagacion"],
+                validated: true,
+                competencias: ["Indaga", "Analiza datos"],
+                recursos: ["Base de datos climáticos", "Plantilla de análisis", "Guía de graficación"],
+                sesiones: [
+                    "Planteamiento y búsqueda de datos históricos",
+                    "Diseño del sistema de monitoreo",
+                    "Recolección y organización de datos",
+                    "Análisis y tendencias locales vs global"
+                ]
             }
         ];
 
+        // ==================== VARIABLES DE FILTRO ====================
+        let currentGradeFilter = 'all';
+        let currentAreaFilter = 'all';
+        let currentSearch = '';
+
+        // ==================== RENDERIZAR SECUENCIAS ====================
+        function renderSequences() {
+            const grid = document.getElementById('sequencesGrid');
+            
+            // Aplicar filtros
+            let filtered = sequences.filter(seq => {
+                const matchGrade = currentGradeFilter === 'all' || seq.grade.includes(currentGradeFilter);
+                const matchArea = currentAreaFilter === 'all' || seq.area.includes(currentAreaFilter);
+                const matchSearch = currentSearch === '' || 
+                    seq.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    seq.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    seq.tags.some(tag => tag.toLowerCase().includes(currentSearch.toLowerCase()));
+                
+                return matchGrade && matchArea && matchSearch;
+            });
+            
+            // Actualizar contador
+            document.getElementById('resultsCount').textContent = 
+                `Mostrando ${filtered.length} de ${sequences.length} secuencias disponibles`;
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No se encontraron secuencias</h3>
+                        <p>Intenta con otros filtros o términos de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(seq => {
+                const tagClass = `tag-${seq.tags[0]}`;
+                const iconMap = {
+                    'indagacion': 'fa-microscope',
+                    'diseno': 'fa-cogs',
+                    'tecnologia': 'fa-laptop',
+                    'evaluacion': 'fa-clipboard-check'
+                };
+                const icon = iconMap[seq.tags[0]] || 'fa-book';
+                
+                return `
+                    <div class="card" onclick="openSequenceDetail(${seq.id})">
+                        <div class="card-image">
+                            <i class="fas ${icon}"></i>
+                            <div class="card-badge">
+                                <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                                Validada
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-tag ${tagClass}">${seq.area}</span>
+                            <h3>${seq.title}</h3>
+                            <p>${seq.description}</p>
+                            <div class="card-features">
+                                ${seq.competencias.map(comp => `
+                                    <span class="feature-tag"><i class="fas fa-bullseye"></i> ${comp}</span>
+                                `).join('')}
+                            </div>
+                            <div class="card-meta">
+                                <span><i class="fas fa-graduation-cap"></i> ${seq.grade}</span>
+                                <span><i class="fas fa-clock"></i> ${seq.duration}</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${seq.context}</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-outline" onclick="event.stopPropagation(); openSequenceDetail(${seq.id})">
+                                <i class="fas fa-eye"></i> Ver detalle
+                            </button>
+                            <button class="btn btn-primary" onclick="event.stopPropagation(); downloadSequence(${seq.id})">
+                                <i class="fas fa-download"></i> Descargar
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==================== FUNCIONES DE FILTRO ====================
+        function filterSequences() {
+            currentSearch = document.getElementById('searchInput').value;
+            renderSequences();
+        }
+
+        function filterByGrade(grade) {
+            currentGradeFilter = grade;
+            
+            // Actualizar botones activos
+            document.querySelectorAll('[id^="filter-grade-"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`filter-grade-${grade === 'all' ? 'all' : grade.replace('°', '')}`).classList.add('active');
+            
+            renderSequences();
+        }
+
+        function filterByArea(area) {
+            currentAreaFilter = area;
+            
+            // Actualizar botones activos
+            document.querySelectorAll('[id^="filter-area-"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`filter-area-${area === 'all' ? 'all' : area.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`).classList.add('active');
+            
+            renderSequences();
+        }
+
+        // ==================== VER DETALLE DE SECUENCIA ====================
+        function openSequenceDetail(id) {
+            const seq = sequences.find(s => s.id === id);
+            openModal('sequence-detail');
+            document.getElementById('modalTitle').textContent = seq.title;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="sequence-detail-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="label">Grado</div>
+                        <div class="value">${seq.grade}</div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="label">Duración</div>
+                        <div class="value">${seq.duration}</div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="label">Contexto</div>
+                        <div class="value">${seq.context}</div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-tags"></i>
+                        <div class="label">Área</div>
+                        <div class="value">${seq.area}</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-align-left" style="color: var(--primary);"></i> Descripción</h4>
+                <p style="margin-bottom: 1.5rem;">${seq.description}</p>
+                
+                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-bullseye" style="color: var(--primary);"></i> Competencias desarrolladas</h4>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    ${seq.competencias.map(comp => `
+                        <span class="tag tag-indagacion">${comp}</span>
+                    `).join('')}
+                </div>
+                
+                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-list-ol" style="color: var(--primary);"></i> Sesiones de la secuencia</h4>
+                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    ${seq.sesiones.map(sesion => `<li style="margin-bottom: 0.5rem;">${sesion}</li>`).join('')}
+                </ol>
+                
+                <h4 style="margin-bottom: 0.75rem;"><i class="fas fa-folder-open" style="color: var(--primary);"></i> Recursos incluidos</h4>
+                <div class="resources-list" style="margin-bottom: 1.5rem;">
+                    ${seq.recursos.map(recurso => `
+                        <div class="resource-item">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="resource-info">
+                                <h4>${recurso}</h4>
+                                <p>Documento descargable en formato PDF</p>
+                            </div>
+                            <button class="btn btn-small btn-outline" onclick="alert('Descargando ${recurso}...')">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--secondary); margin-bottom: 1.5rem;">
+                    <strong><i class="fas fa-lightbulb"></i> ¿Por qué es pedagógicamente válida?</strong>
+                    <p style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.95rem;">
+                        Esta secuencia parte del entorno inmediato del estudiante, genera cognición disonante 
+                        al confrontar predicciones con datos reales, y culmina en una propuesta de acción concreta.
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="downloadSequence(${seq.id})" style="flex: 1;">
+                        <i class="fas fa-download"></i> Descargar secuencia completa
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
+                </div>
+            `;
+        }
+
+        function downloadSequence(id) {
+            const seq = sequences.find(s => s.id === id);
+            alert(`Descargando: ${seq.title}\n\nEn una implementación real, esto generaría un PDF con toda la secuencia didáctica.`);
+        }
+
+        // ==================== DATOS Y FUNCIONES EXISTENTES ====================
         const inquirySteps = [
             {
                 num: 1, title: "Planteamiento del Problema",
@@ -446,29 +935,6 @@
                 useCase: "Toma de datos en salidas de campo sin equipo especializado"
             }
         ];
-
-        // ==================== FUNCIONES ====================
-        function renderSequences() {
-            const grid = document.getElementById('sequencesGrid');
-            grid.innerHTML = sequences.map(seq => `
-                <div class="card" onclick="openSequence(${seq.id})">
-                    <div class="card-header">
-                        <div>
-                            <span class="card-tag tag-${seq.tags[0]}">${seq.area}</span>
-                            ${seq.validated ? '<span style="color: var(--secondary); font-size: 0.75rem; margin-left: 0.5rem;"><i class="fas fa-check-circle"></i></span>' : ''}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3>${seq.title}</h3>
-                        <p>${seq.description}</p>
-                        <div class="card-meta">
-                            <span><i class="fas fa-graduation-cap"></i> ${seq.grade}</span>
-                            <span><i class="fas fa-clock"></i> ${seq.duration}</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
 
         function renderInquirySteps() {
             const container = document.getElementById('inquirySteps');
@@ -528,17 +994,23 @@
                         const data = doc.data();
                         const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('es-ES') : 'Reciente';
                         const initials = data.author ? data.author.substring(0, 2).toUpperCase() : 'AN';
+                        const isAnswered = data.answered;
+                        const statusClass = isAnswered ? '' : 'pending';
+                        const avatarClass = isAnswered ? '' : 'pending';
                         
                         return `
-                            <div class="discussion-item">
-                                <div class="discussion-avatar">${initials}</div>
+                            <div class="discussion-item ${statusClass}" onclick="openQuestionDetail('${doc.id}')">
+                                <div class="discussion-avatar ${avatarClass}">${initials}</div>
                                 <div class="discussion-content">
                                     <h4>${data.title}</h4>
                                     <p>${data.content.substring(0, 100)}${data.content.length > 100 ? '...' : ''}</p>
                                     <div class="discussion-meta">
                                         <span><i class="fas fa-user"></i> ${data.author} - ${data.grade}</span>
                                         <span><i class="fas fa-clock"></i> ${date}</span>
-                                        ${data.answered ? '<span style="color: var(--secondary);"><i class="fas fa-check-circle"></i> Respondido</span>' : ''}
+                                        ${isAnswered ? 
+                                            '<span style="color: var(--secondary);"><i class="fas fa-check-circle"></i> Respondido - Ver respuesta</span>' : 
+                                            '<span style="color: var(--accent);"><i class="fas fa-clock"></i> Pendiente</span>'
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -549,6 +1021,54 @@
                     console.error("Error cargando consultas:", error);
                     loadingDiv.innerHTML = '<p style="color: #dc2626;">Error al cargar. Recarga la página.</p>';
                 });
+        }
+
+        function openQuestionDetail(id) {
+            db.collection('questions').doc(id).get().then(doc => {
+                const data = doc.data();
+                openModal('question-detail');
+                document.getElementById('modalTitle').textContent = 'Consulta y Respuesta';
+                
+                const date = data.timestamp ? data.timestamp.toDate().toLocaleString('es-ES') : 'Fecha no disponible';
+                const responseDate = data.responseDate ? data.responseDate.toDate().toLocaleString('es-ES') : 'Fecha no disponible';
+                
+                document.getElementById('modalBody').innerHTML = `
+                    <div style="margin-bottom: 1.5rem;">
+                        <span class="tag ${data.answered ? 'tag-evaluacion' : 'tag-tecnologia'}" style="margin-bottom: 1rem; display: inline-block;">
+                            ${data.answered ? 'Respondido' : 'Pendiente'}
+                        </span>
+                        <h3 style="margin-bottom: 0.5rem;">${data.title}</h3>
+                        <div class="discussion-meta" style="margin-bottom: 1rem;">
+                            <span><i class="fas fa-user"></i> ${data.author}</span>
+                            <span><i class="fas fa-graduation-cap"></i> ${data.grade}</span>
+                            <span><i class="fas fa-tag"></i> ${data.type}</span>
+                            <span><i class="fas fa-clock"></i> ${date}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.875rem; text-transform: uppercase;">Consulta:</h4>
+                        <p style="margin: 0;">${data.content}</p>
+                    </div>
+                    
+                    ${data.answered ? `
+                        <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                            <h4 style="margin-bottom: 0.75rem; color: var(--secondary);">
+                                <i class="fas fa-reply"></i> Respuesta del Especialista CyT
+                            </h4>
+                            <p style="margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.6;">${data.response || 'Sin texto de respuesta'}</p>
+                            <small style="color: var(--text-light);">
+                                <i class="fas fa-clock"></i> Respondido el: ${responseDate}
+                            </small>
+                        </div>
+                    ` : `
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+                            <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;"></i>
+                            <p>Esta consulta está pendiente de respuesta. El especialista responderá pronto.</p>
+                        </div>
+                    `}
+                `;
+            });
         }
 
         // ==================== FIREBASE: ENVIAR CONSULTA ====================
@@ -653,10 +1173,6 @@
                         <div id="rubricResult" style="margin-top: 1rem;"></div>
                     `;
                     break;
-                    
-                default:
-                    title.textContent = 'Información';
-                    body.innerHTML = '<p>Funcionalidad en desarrollo.</p>';
             }
         }
 
@@ -701,29 +1217,6 @@
                 <button class="btn btn-primary" style="margin-top: 1rem;" onclick="window.print()">
                     <i class="fas fa-print"></i> Imprimir rúbrica
                 </button>
-            `;
-        }
-
-        function openSequence(id) {
-            const seq = sequences.find(s => s.id === id);
-            openModal('sequence-detail');
-            document.getElementById('modalTitle').textContent = seq.title;
-            document.getElementById('modalBody').innerHTML = `
-                <div style="margin-bottom: 1rem;">
-                    <span class="card-tag tag-${seq.tags[0]}">${seq.area}</span>
-                    <span style="margin-left: 0.5rem; color: var(--text-light);">${seq.grade} • ${seq.duration}</span>
-                </div>
-                <p>${seq.description}</p>
-                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Evidencias de aprendizaje:</h4>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Registro de campo con datos cuantitativos</li>
-                    <li>Informe con hipótesis validada</li>
-                    <li>Propuesta de mejora basada en evidencias</li>
-                </ul>
-                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
-                    <strong>¿Por qué es pedagógicamente válida?</strong><br>
-                    Parte del entorno inmediato del estudiante, genera cognición disonante y culmina en propuesta de acción concreta.
-                </div>
             `;
         }
 
