@@ -1,4 +1,4 @@
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -381,6 +381,218 @@
         .mobile-nav a.active { color: var(--primary); }
         .mobile-nav i { font-size: 1.25rem; }
 
+        /* ====== ESTILOS SECCIÓN EVALUACIÓN MEJORADA ====== */
+        .eval-tabs {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap;
+            border-bottom: 2px solid var(--border); padding-bottom: 10px;
+        }
+        .eval-tab-btn {
+            padding: 0.875rem 1.5rem; border: 2px solid var(--border); background: white;
+            border-radius: 0.5rem; cursor: pointer; font-weight: 600;
+            transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .eval-tab-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .eval-tab-btn.active {
+            background: var(--primary); color: white; border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .eval-content { display: none; animation: fadeIn 0.4s; }
+        .eval-content.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .rubrica-table-container {
+            overflow-x: auto; margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg); border-radius: 0.75rem;
+            background: white;
+        }
+        .rubrica-table {
+            width: 100%; border-collapse: collapse; font-size: 0.9rem;
+        }
+        .rubrica-table th {
+            background: var(--primary); color: white; padding: 1rem;
+            text-align: left; font-weight: 600;
+        }
+        .rubrica-table td {
+            padding: 0.875rem; border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .rubrica-table tr:nth-child(even) { background: #f8fafc; }
+        .rubrica-table tr:hover { background: #f1f5f9; }
+        .criterio {
+            background: #eff6ff !important; font-weight: 600; color: var(--primary-dark);
+            width: 18%;
+        }
+        
+        .calc-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 1.5rem; border-radius: 0.75rem;
+            border: 2px solid #86efac; margin-top: 1.5rem;
+        }
+        .calc-row {
+            display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;
+        }
+        .calc-row label {
+            display: flex; flex-direction: column; gap: 0.25rem;
+            font-weight: 600; font-size: 0.875rem;
+        }
+        .calc-row select {
+            padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--border);
+            width: 100px;
+        }
+        .resultado-final {
+            font-size: 1.5rem; font-weight: bold; color: var(--secondary);
+            text-align: center; margin-top: 1rem;
+            padding: 0.75rem; background: white; border-radius: 0.5rem;
+            display: inline-block;
+        }
+        
+        .rubrica-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .rubrica-card {
+            background: white; border: 2px solid var(--border);
+            border-radius: 0.75rem; overflow: hidden;
+            transition: all 0.3s;
+        }
+        .rubrica-card:hover {
+            transform: translateY(-3px); box-shadow: var(--shadow-lg);
+            border-color: var(--purple);
+        }
+        .rubrica-card-header {
+            background: var(--purple); color: white;
+            padding: 1rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .rubrica-card-header h4 { margin: 0; font-size: 1rem; }
+        .peso {
+            background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem;
+            border-radius: 9999px; font-size: 0.875rem;
+        }
+        .niveles { list-style: none; padding: 0; margin: 0; }
+        .niveles li {
+            padding: 0.875rem; border-bottom: 1px solid var(--border);
+            font-size: 0.9rem; line-height: 1.5;
+        }
+        .niveles li:last-child { border-bottom: none; }
+        .niveles li strong { color: var(--purple); }
+        
+        .auto-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        }
+        .auto-box {
+            background: white; padding: 1.5rem;
+            border-radius: 0.75rem; border: 2px solid var(--border);
+            border-left: 4px solid var(--secondary);
+        }
+        .auto-box h4 {
+            color: var(--secondary); margin-top: 0; margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        .checklist-eval {
+            display: flex; flex-direction: column; gap: 0.75rem;
+        }
+        .check-item {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            cursor: pointer; font-size: 0.95rem; line-height: 1.4;
+        }
+        .check-item input[type="checkbox"] {
+            width: 18px; height: 18px; margin-top: 2px;
+            cursor: pointer; accent-color: var(--secondary);
+        }
+        .reflexion-box {
+            grid-column: 1 / -1; background: #fffbeb;
+            padding: 1.5rem; border-radius: 0.75rem;
+            border: 2px solid #fcd34d;
+        }
+        .reflexion-box h4 { color: #d97706; margin-top: 0; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label {
+            display: block; font-weight: 600; margin-bottom: 0.5rem;
+            color: var(--text); font-size: 0.9rem;
+        }
+        .input-group textarea {
+            width: 100%; min-height: 80px; padding: 0.75rem;
+            border: 1px solid var(--border); border-radius: 0.5rem;
+            font-family: inherit; resize: vertical;
+        }
+        
+        .feedback-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        }
+        .feedback-card {
+            background: white; border-radius: 0.75rem;
+            padding: 1.5rem; border: 2px solid var(--border);
+        }
+        .feedback-card h4 {
+            margin-top: 0; margin-bottom: 1rem;
+            color: var(--text); border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        .ejemplo { margin-bottom: 1rem; }
+        .ejemplo .tag {
+            font-size: 0.75rem; font-weight: bold; color: var(--text-light);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .ejemplo .mal {
+            color: var(--danger); text-decoration: line-through;
+            margin: 0.25rem 0; font-style: italic;
+        }
+        .ejemplo .bien {
+            color: var(--secondary); font-weight: 600;
+            margin: 0.25rem 0;
+        }
+        .tecnica-card { background: #eff6ff; border-color: #bfdbfe; }
+        .tecnica-card h4 { color: var(--primary); border-color: #bfdbfe; }
+        .tecnica-card ol { padding-left: 1.25rem; }
+        .tecnica-card li { margin-bottom: 0.75rem; line-height: 1.5; }
+        
+        .phrases-card { background: #faf5ff; border-color: #e9d5ff; }
+        .phrases-card h4 { color: var(--purple); border-color: #e9d5ff; }
+        .phrases-card ul { list-style: none; padding: 0; }
+        .phrases-card li {
+            padding: 0.5rem 0; border-bottom: 1px dashed #e9d5ff;
+            font-size: 0.95rem;
+        }
+        .phrases-card li:last-child { border-bottom: none; }
+        .phrases-card em { color: var(--purple); font-weight: 600; }
+        
+        .registro-card { background: #fffbeb; border-color: #fcd34d; }
+        .registro-card h4 { color: #d97706; border-color: #fcd34d; }
+        .quick-form {
+            border: 2px dashed var(--border); padding: 1rem;
+            border-radius: 0.5rem; background: white;
+        }
+        .form-row {
+            display: flex; justify-content: space-between; margin-bottom: 0.75rem;
+            font-size: 0.875rem; color: var(--text-light);
+        }
+        .obs-line {
+            border-bottom: 1px solid var(--border); height: 2rem; margin-bottom: 0.5rem;
+        }
+        .check-tipo {
+            display: flex; gap: 1rem; margin-top: 0.75rem;
+            font-size: 0.875rem; flex-wrap: wrap;
+        }
+        .check-tipo label { display: flex; align-items: center; gap: 0.25rem; }
+        
+        .download-eval-box {
+            margin-top: 2rem; text-align: center;
+            padding: 2rem; background: var(--bg); border-radius: 0.75rem;
+        }
+        .btn-download {
+            background: var(--primary); color: white; border: none;
+            padding: 0.75rem 1.5rem; margin: 0.25rem;
+            border-radius: 0.5rem; cursor: pointer;
+            transition: all 0.2s; font-weight: 600;
+        }
+        .btn-download:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
         @media (max-width: 768px) {
             .nav-desktop { display: none; }
             .mobile-menu-btn { display: block; }
@@ -393,6 +605,14 @@
             .cards-grid { grid-template-columns: 1fr; }
             .guides-tabs { flex-direction: column; }
             .tab-btn { width: 100%; justify-content: center; }
+            
+            /* Responsive evaluación */
+            .auto-grid, .feedback-grid { grid-template-columns: 1fr; }
+            .rubrica-table { font-size: 0.8rem; }
+            .criterio { width: 25%; }
+            .calc-row { flex-direction: column; }
+            .eval-tabs { flex-direction: column; }
+            .eval-tab-btn { width: 100%; justify-content: center; }
         }
 
         .text-center { text-align: center; }
@@ -523,7 +743,6 @@
                 <p>Metodologías paso a paso para implementar en tu aula. Selecciona la guía que necesitas.</p>
             </div>
             
-            <!-- Tabs de selección -->
             <div class="guides-tabs">
                 <button class="tab-btn active" onclick="switchGuide('indagacion')">
                     <div class="tab-icon"><i class="fas fa-microscope"></i></div>
@@ -541,7 +760,6 @@
                 </button>
             </div>
             
-            <!-- GUÍA DE INDAGACIÓN CIENTÍFICA -->
             <div id="guide-indagacion" class="guide-content active">
                 <div class="guide-intro">
                     <h3 style="margin-bottom: 0.75rem; color: var(--primary);"><i class="fas fa-microscope"></i> Guía de Indagación Científica</h3>
@@ -567,7 +785,6 @@
                 </div>
             </div>
             
-            <!-- GUÍA DE DISEÑO TECNOLÓGICO -->
             <div id="guide-diseno" class="guide-content">
                 <div class="guide-intro diseno">
                     <h3 style="margin-bottom: 0.75rem; color: var(--purple);"><i class="fas fa-cogs"></i> Guía de Diseño Tecnológico</h3>
@@ -594,24 +811,335 @@
             </div>
         </section>
 
+        <!-- EVALUACIÓN MEJORADA -->
         <section id="evaluacion" class="section">
             <div class="section-header">
                 <h2>Evaluación Clara y Usable</h2>
-                <p>Rúbricas y herramientas conectadas a competencias reales.</p>
+                <p>Herramientas prácticas para evaluar competencias sin complicaciones. Enfoque en el proceso, no solo en el producto final.</p>
             </div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="openModal('rubric-builder')">
-                    <div class="tool-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Constructor de Rúbricas</h3>
-                    <p>Crea rúbricas específicas para competencias de indagación.</p>
-                    <button class="btn btn-primary btn-small">Usar constructor</button>
+
+            <div class="eval-tabs">
+                <button class="eval-tab-btn active" onclick="switchEvalTab('rubrica-indagacion', this)">
+                    <i class="fas fa-table"></i> Rúbrica Indagación
+                </button>
+                <button class="eval-tab-btn" onclick="switchEvalTab('rubrica-diseno', this)">
+                    <i class="fas fa-cogs"></i> Rúbrica Diseño
+                </button>
+                <button class="eval-tab-btn" onclick="switchEvalTab('autoevaluacion', this)">
+                    <i class="fas fa-user-check"></i> Autoevaluación
+                </button>
+                <button class="eval-tab-btn" onclick="switchEvalTab('retroalimentacion', this)">
+                    <i class="fas fa-comments"></i> Retroalimentación
+                </button>
+            </div>
+
+            <!-- Rúbrica Indagación -->
+            <div id="rubrica-indagacion" class="eval-content active">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);"><i class="fas fa-microscope"></i> Rúbrica de Indagación Científica</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Evalúa el proceso completo: desde la pregunta hasta la conclusión. Puntuación: 1 (Inicial) a 4 (Satisfactorio)</p>
+                
+                <div class="rubrica-table-container">
+                    <table class="rubrica-table">
+                        <thead>
+                            <tr>
+                                <th>Competencia/Desempeño</th>
+                                <th>1 - En Proceso</th>
+                                <th>2 - Logro Intermedio</th>
+                                <th>3 - Logro Esperado</th>
+                                <th>4 - Destacado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="criterio"><strong>Formula preguntas</strong><br><small>Pregunta de investigación</small></td>
+                                <td>Pregunta muy amplia o no investigable ("¿Por qué existe el agua?")</td>
+                                <td>Pregunta específica pero no relaciona variables claramente</td>
+                                <td>Pregunta clara, concreta, relaciona variables medibles y es investigable con evidencia</td>
+                                <td>Pregunta innovadora que conecta variables de forma inesperada o propone nuevas relaciones</td>
+                            </tr>
+                            <tr>
+                                <td class="criterio"><strong>Diseña estrategias</strong><br><small>Hipótesis y procedimiento</small></td>
+                                <td>Hipótesis como adivinanza sin justificación. Procedimiento confuso</td>
+                                <td>Hipótesis relaciona variables pero sin explicación científica. Procedimiento con pasos faltantes</td>
+                                <td>Hipótesis completa (Si...entonces...porque). Procedimiento claro, con controles y repeticiones</td>
+                                <td>Hipótesis fundamentada en investigación previa. Procedimiento optimizado con medidas de seguridad</td>
+                            </tr>
+                            <tr>
+                                <td class="criterio"><strong>Genera registros</strong><br><small>Datos y evidencias</small></td>
+                                <td>Datos desorganizados, sin unidades, faltan registros</td>
+                                <td>Datos en tablas pero con errores de unidades o faltan observaciones cualitativas</td>
+                                <td>Tablas organizadas con unidades, datos cuantitativos y cualitativos, fotos o dibujos del proceso</td>
+                                <td>Uso de gráficos, identificación de valores atípicos, registro de errores y ajustes durante el proceso</td>
+                            </tr>
+                            <tr>
+                                <td class="criterio"><strong>Analiza e interpreta</strong><br><small>Conclusión</small></td>
+                                <td>Conclusión no responde la pregunta o es opinión personal</td>
+                                <td>Responde la pregunta pero sin usar datos como evidencia</td>
+                                <td>Conclusión estructurada (respuesta, hipótesis, explicación, limitaciones, nuevas preguntas)</td>
+                                <td>Análisis crítico que propone aplicaciones prácticas al contexto local o Huaylas</td>
+                            </tr>
+                            <tr>
+                                <td class="criterio"><strong>Reflexiona éticamente</strong><br><small>Impacto e implicancias</small></td>
+                                <td>No considera consecuencias del conocimiento generado</td>
+                                <td>Menciona impacto superficialmente</td>
+                                <td>Analiza impacto ambiental/social local (ej: "¿Cómo afecta esto a nuestra quebrada?")</td>
+                                <td>Propone acciones concretas de mejora para la comunidad basadas en resultados</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-link"></i></div>
-                    <h3>Verificador de Alineación</h3>
-                    <p>Revisa si actividad, evidencia y criterio están conectados.</p>
-                    <button class="btn btn-primary btn-small">Verificar ahora</button>
+                
+                <div class="calc-box">
+                    <h4 style="margin-top: 0; color: var(--secondary);"><i class="fas fa-calculator"></i> Calculadora Rápida</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Selecciona el nivel alcanzado en cada criterio:</p>
+                    <div class="calc-row">
+                        <label>Pregunta: <select onchange="calcularNotaIndagacion()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+                        <label>Diseño: <select onchange="calcularNotaIndagacion()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+                        <label>Registros: <select onchange="calcularNotaIndagacion()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+                        <label>Análisis: <select onchange="calcularNotaIndagacion()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+                        <label>Ética: <select onchange="calcularNotaIndagacion()"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="resultado-final">Promedio: <span id="promedio-indagacion">3.0</span> / 4.0</div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Rúbrica Diseño -->
+            <div id="rubrica-diseno" class="eval-content">
+                <h3 style="margin-bottom: 1rem; color: var(--purple);"><i class="fas fa-cogs"></i> Rúbrica de Diseño Tecnológico</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Evalúa soluciones tecnológicas sostenibles del contexto local</p>
+                
+                <div class="rubrica-cards">
+                    <div class="rubrica-card">
+                        <div class="rubrica-card-header">
+                            <h4>Identificación de Necesidad</h4>
+                            <span class="peso">20%</span>
+                        </div>
+                        <ul class="niveles">
+                            <li><strong>4:</strong> Necesidad real validada con usuarios de la comunidad/Huaylas. Análisis profundo del contexto</li>
+                            <li><strong>3:</strong> Necesidad real del entorno escolar/comunal, bien definida y factible</li>
+                            <li><strong>2:</strong> Necesidad identificada pero poco clara o no prioritaria</li>
+                            <li><strong>1:</strong> Solución buscando problema. No hay necesidad real identificada</li>
+                        </ul>
+                    </div>
+
+                    <div class="rubrica-card">
+                        <div class="rubrica-card-header">
+                            <h4>Investigación del Estado del Arte</h4>
+                            <span class="peso">15%</span>
+                        </div>
+                        <ul class="niveles">
+                            <li><strong>4:</strong> Investiga saberes locales + soluciones modernas. Propone mejora innovadora</li>
+                            <li><strong>3:</strong> Consulta diversas fuentes (abuelos, internet, libros) y adapta soluciones</li>
+                            <li><strong>2:</strong> Solo busca en internet o solo pregunta a familiares</li>
+                            <li><strong>1:</strong> No investiga. "Inventa" sin buscar referencias</li>
+                        </ul>
+                    </div>
+
+                    <div class="rubrica-card">
+                        <div class="rubrica-card-header">
+                            <h4>Diseño y Prototipo</h4>
+                            <span class="peso">25%</span>
+                        </div>
+                        <ul class="niveles">
+                            <li><strong>4:</strong> Bocetos detallados, lista de materiales locales/reciclados, planificación de ensamblaje</li>
+                            <li><strong>3:</strong> Dibujo claro, materiales accesibles, función explicada, criterios de éxito definidos</li>
+                            <li><strong>2:</strong> Boceto simple, materiales costosos o difíciles de conseguir en Huaylas</li>
+                            <li><strong>1:</strong> Sin boceto. Materiales irreales o peligrosos</li>
+                        </ul>
+                    </div>
+
+                    <div class="rubrica-card">
+                        <div class="rubrica-card-header">
+                            <h4>Construcción y Prueba</h4>
+                            <span class="peso">25%</span>
+                        </div>
+                        <ul class="niveles">
+                            <li><strong>4:</strong> Construcción segura, pruebas rigurosas (3+ veces), registro fotográfico, ajustes documentados</li>
+                            <li><strong>3:</strong> Prototipo funcional, probado al menos 2 veces, registro de datos en tabla</li>
+                            <li><strong>2:</strong> Prototipo frágil o inseguro, una sola prueba, datos incompletos</li>
+                            <li><strong>1:</strong> No termina la construcción o prototipo no funciona</li>
+                        </ul>
+                    </div>
+
+                    <div class="rubrica-card">
+                        <div class="rubrica-card-header">
+                            <h4>Iteración y Mejora</h4>
+                            <span class="peso">15%</span>
+                        </div>
+                        <ul class="niveles">
+                            <li><strong>4:</strong> Mejoras implementadas y probadas. Análisis costo-beneficio y sostenibilidad</li>
+                            <li><strong>3:</strong> Identifica fallas, propone mejoras concretas y factibles, versión 2.0</li>
+                            <li><strong>2:</strong> Reconoce errores pero no propone soluciones claras</li>
+                            <li><strong>1:</strong> No reconoce errores o culpa a factores externos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Autoevaluación -->
+            <div id="autoevaluacion" class="eval-content">
+                <h3 style="margin-bottom: 1rem; color: var(--secondary);"><i class="fas fa-user-check"></i> Autoevaluación para Estudiantes</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Instrumentos simples para que el estudiante reflexione sobre su proceso</p>
+                
+                <div class="auto-grid">
+                    <div class="auto-box">
+                        <h4><i class="fas fa-microscope"></i> Durante la Indagación</h4>
+                        <div class="checklist-eval">
+                            <label class="check-item">
+                                <input type="checkbox"> Mi pregunta puede responderse con evidencia, no solo opinión
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Controlé variables (mantuve todo igual excepto lo que cambié)
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Repetí el experimento al menos 3 veces
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Anoté todo: números Y observaciones (olores, colores, sonidos)
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Mi conclusión usa los datos que recogí, no lo que "creo"
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Pensé en cómo mi investigación ayuda a mi comunidad
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="auto-box">
+                        <h4><i class="fas fa-cogs"></i> Durante el Diseño</h4>
+                        <div class="checklist-eval">
+                            <label class="check-item">
+                                <input type="checkbox"> Hablamos con personas que tienen el problema para entenderlo bien
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Usamos materiales que encontramos fácilmente en Huaylas (no caros)
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Hicimos dibujos del prototipo antes de construir
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Trabajamos con seguridad (tijeras, cuchillos, pegamento con cuidado)
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Probamos el prototipo varias veces y anotamos qué pasó
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox"> Propusimos al menos 2 mejoras concretas para la próxima versión
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="reflexion-box">
+                        <h4><i class="fas fa-pen"></i> Reflexión Final (Escribe 3 líneas)</h4>
+                        <div class="input-group">
+                            <label>Lo más difícil fue:</label>
+                            <textarea placeholder="Ej: Controlar la temperatura del agua porque cambiaba rápido..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Lo que aprendí y puedo usar en mi vida:</label>
+                            <textarea placeholder="Ej: Ahora sé que debo probar varias veces antes de concluir..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Si lo hiciera de nuevo, cambiaría:</label>
+                            <textarea placeholder="Ej: Usaría botellas más grandes para que dure más el riego..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retroalimentación -->
+            <div id="retroalimentacion" class="eval-content">
+                <h3 style="margin-bottom: 1rem; color: var(--accent);"><i class="fas fa-comments"></i> Guía de Retroalimentación Efectiva</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Cómo dar comentarios que mejoren el aprendizaje sin desmotivar</p>
+                
+                <div class="feedback-grid">
+                    <div class="feedback-card">
+                        <h4><i class="fas fa-check-circle"></i> Ejemplos de Retroalimentación Constructiva</h4>
+                        
+                        <div class="ejemplo">
+                            <span class="tag">En lugar de:</span>
+                            <p class="mal">"Está mal tu hipótesis"</p>
+                            <span class="tag">Mejor:</span>
+                            <p class="bien">"Tu hipótesis conecta temperatura y disolución, pero ¿podrías explicar por qué crees que ocurre eso? Recuerda el 'porque' científico"</p>
+                        </div>
+                        
+                        <div class="ejemplo">
+                            <span class="tag">En lugar de:</span>
+                            <p class="mal">"El prototipo no sirve"</p>
+                            <span class="tag">Mejor:</span>
+                            <p class="bien">"El sistema gotea muy rápido (2 días vs 3 esperados). ¿Qué pasa si haces el agujero más pequeño o usas tapa de rocío?"</p>
+                        </div>
+                        
+                        <div class="ejemplo">
+                            <span class="tag">En lugar de:</span>
+                            <p class="mal">"Faltan datos"</p>
+                            <span class="tag">Mejor:</span>
+                            <p class="bien">"Veo que mediste el tiempo pero no anotaste si el día estaba soleado o nublado. Eso podría explicar por qué un ensayo fue diferente"</p>
+                        </div>
+                    </div>
+
+                    <div class="feedback-card tecnica-card">
+                        <h4><i class="fas fa-bread-slice"></i> Técnica del "Sándwich de Retroalimentación"</h4>
+                        <ol>
+                            <li><strong>Pan superior (Fortaleza específica):</strong> "Me gusta cómo usaste materiales reciclados de la comunidad"</li>
+                            <li><strong>Relleno (Área de mejora concreta):</strong> "Para la próxima, necesitas hacer 3 repeticiones, no solo una, para que tus datos sean confiables"</li>
+                            <li><strong>Pan inferior (Confianza):</strong> "Veo que entiendes bien el método, vas por buen camino"</li>
+                        </ol>
+                    </div>
+
+                    <div class="feedback-card phrases-card">
+                        <h4><i class="fas fa-comment-dots"></i> Frases Útiles para el Docente</h4>
+                        <ul>
+                            <li><em>"Los datos dicen..."</em> (objetiva, no opinativa)</li>
+                            <li><em>"Según tu tabla..."</em> (evidencia concreta)</li>
+                            <li><em>"Un científico/diseñador notaría que..."</em> (rol profesional)</li>
+                            <li><em>"¿Qué pasaría si...?"</em> (provocar pensamiento)</li>
+                            <li><em>"Esto me recuerda a..."</em> (conectar con saberes locales)</li>
+                            <li><em>"Tu quebrada/comunidad necesitaría..."</em> (contextualizar)</li>
+                        </ul>
+                    </div>
+
+                    <div class="feedback-card registro-card">
+                        <h4><i class="fas fa-clipboard"></i> Registro Rápido de Observaciones</h4>
+                        <div class="quick-form">
+                            <div class="form-row">
+                                <span>Fecha: ___/___</span>
+                                <span>Grupo/Est: ____________</span>
+                            </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <strong style="font-size: 0.875rem; color: var(--text-light);">Observación específica:</strong>
+                                <div class="obs-line"></div>
+                                <strong style="font-size: 0.875rem; color: var(--text-light);">Pregunta provocadora:</strong>
+                                <div class="obs-line"></div>
+                            </div>
+                            <div class="check-tipo">
+                                <label><input type="checkbox"> Indagación</label>
+                                <label><input type="checkbox"> Diseño</label>
+                                <label><input type="checkbox"> Trabajo colab.</label>
+                                <label><input type="checkbox"> Seguridad</label>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.875rem; color: var(--text-light); margin-top: 0.75rem; font-style: italic;">
+                            <strong>Tip:</strong> Anota inmediatamente, no al final de clase. Una observación específica vale más que una nota genérica.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-eval-box">
+                <h4 style="margin-bottom: 1rem;"><i class="fas fa-download"></i> Descargables</h4>
+                <button class="btn-download" onclick="alert('Descargando: rúbrica_indagacion.pdf')">
+                    <i class="fas fa-file-pdf"></i> Rúbrica Indagación (PDF)
+                </button>
+                <button class="btn-download" onclick="alert('Descargando: rúbrica_diseno.pdf')">
+                    <i class="fas fa-file-pdf"></i> Rúbrica Diseño (PDF)
+                </button>
+                <button class="btn-download" onclick="alert('Descargando: registro_observaciones.docx')">
+                    <i class="fas fa-file-word"></i> Registro Observaciones (Word)
+                </button>
             </div>
         </section>
 
@@ -1206,13 +1734,32 @@
         }
 
         function switchGuide(guide) {
-            // Actualizar tabs
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
             
-            // Mostrar contenido correspondiente
             document.querySelectorAll('.guide-content').forEach(content => content.classList.remove('active'));
             document.getElementById(`guide-${guide}`).classList.add('active');
+        }
+
+        // ==================== EVALUACIÓN: TABS Y CALCULADORA ====================
+        function switchEvalTab(tabId, btn) {
+            // Desactivar todos los tabs y contenidos
+            document.querySelectorAll('.eval-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.eval-content').forEach(c => c.classList.remove('active'));
+            
+            // Activar el seleccionado
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function calcularNotaIndagacion() {
+            const selects = document.querySelectorAll('#rubrica-indagacion select');
+            let suma = 0;
+            selects.forEach(select => {
+                suma += parseInt(select.value);
+            });
+            const promedio = (suma / selects.length).toFixed(1);
+            document.getElementById('promedio-indagacion').textContent = promedio;
         }
 
         function downloadTemplate(type) {
@@ -1223,7 +1770,7 @@
             alert(`Descargando: ${templates[type]}\n\nEn una implementación real, esto descargaría el archivo editable.`);
         }
 
-        // ==================== SECUENCIAS (código existente simplificado) ====================
+        // ==================== SECUENCIAS ====================
         let currentGradeFilter = 'all';
         let currentSearch = '';
 
@@ -1303,7 +1850,7 @@
             `;
         }
 
-        // ==================== FIREBASE Y MODALES (código existente) ====================
+        // ==================== FIREBASE Y MODALES ====================
         function loadQuestions() {
             const loadingDiv = document.getElementById('loadingQuestions');
             const listDiv = document.getElementById('questionsList');
@@ -1441,9 +1988,6 @@
                         <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Enviar</button>
                     </form>
                 `;
-            } else if (type === 'rubric-builder') {
-                title.textContent = 'Constructor de Rúbricas';
-                body.innerHTML = '<p>Selecciona competencia...</p>';
             }
         }
 
